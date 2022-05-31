@@ -129,7 +129,14 @@ Use the following guide to fully take advantage of this project template:
 14. Integrate your PyPI_  and TestPyPI_ API-Token_ as explained in the
     :ref:`release workflow <workflows_releases>` sections.
 
-15. Add, commit and push all changes to your new remote repo:
+15. Install and add git pre-commit hooks:
+
+    .. code-block:: console
+
+       pip install --user --upgrade pre-commit
+       pre-commit install
+
+16. Add, commit and push all changes to your new remote repo:
 
     .. code-block:: console
 
@@ -139,9 +146,9 @@ Use the following guide to fully take advantage of this project template:
        $ git branch -M main
        $ git push -u origin main
 
-16. All set up! You can now branch of your default branch
+17. All set up! You can now branch of your default branch
 
-17. Make sure to checkout the :ref:`Workflows Developer Guide <workflows>` to
+18. Make sure to checkout the :ref:`Workflows Developer Guide <workflows>` to
     acquaint yourself with the usage of Poetry_, Nox_ and Github_.
 
 
