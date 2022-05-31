@@ -35,37 +35,51 @@ hpmpy-project
    :target: https://github.com/psf/black
    :alt: Black
 
+Newb tweaked non-typing version of the excellent Hypermodern-Python_ project
+foundation proposed by `Claudio Jolowicz <cj>`_
 
-Latest Stable Version
----------------------
-You can install *hpmpy-project* via pip_ from PyPI_.
-Install using a console with your virtual environment activated:
+Installation
+------------
 
-.. code-block:: console
+Follow the `Installation Guide`_.
 
-   $ pip install hpmpy-project
 
-Latest Development Version (potentially unstable)
--------------------------------------------------
+Usage
+-----
 
-You can install the development version of *hpmpy-project* via pip_ from TestPyPI_.
-Install using a console with your virtual environment activated:
+Please see the `Command-line Reference <Usage_>`_ for details.
 
-.. code-block:: console
 
-   $ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ hpmpy-project
+Contributing
+------------
 
-This installs the TestPyPI_ version of hpmpy_project while resolving the dependencies on PyPI_.
+Contributions are very welcome.
+To learn more, see the `Contributor Guide`_.
+
 
 License
 -------
+
 Distributed under the terms of the `MIT license`_,
-*hpmpy-project* is free and open source software.
+*Zettelkasten* is free and open source software.
+
+
+Issues
+------
+
+If you encounter any problems,
+please `file an issue`_ along with a detailed description.
+
+
+.. _Hypermodern-Python: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
+.. _Hypermodern Python Cookiecutter: https://github.com/cjolowicz/cookiecutter-hypermodern-python
+.. _cj: https://github.com/cjolowicz
 
 .. _MIT license: https://opensource.org/licenses/MIT
 .. _PyPI: https://pypi.org/
-.. _TestPyPI: https://test.pypi.org/
+
+.. _file an issue: https://github.com/tZ3ma/hpmpy-project/issues
 .. _pip: https://pip.pypa.io/
 .. github-only
 .. _Contributor Guide: CONTRIBUTING.rst
-.. _Usage: https://hpmpy_project.readthedocs.io/en/latest/usage.html
+.. _Installation Guide: docs/source/getting_started/installation.rst
