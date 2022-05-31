@@ -49,7 +49,7 @@ Installation
 
          $ curl https://pyenv.run | bash
 
-   B. Add the following lines to your :file:`~/.bashrc` to make pyenv known to
+   B. Add the following lines to your ``~/.bashrc`` to make pyenv known to
       your system:
 
       .. code-block:: console
@@ -125,7 +125,7 @@ Installation
       $ git grep -lz hpmpy-project | xargs -0 sed -i -e "s/hpmpy-project/MY-PROJECT/g"
       $ git grep -lz hpmpy_project | xargs -0 sed -i -e "s/hpmpy-project/MY_PROJECT/g"
 
-9. Rename the :file:`src/hpmpy_project` package folder by replacing
+9. Rename the ``src/hpmpy_project`` package folder by replacing
    :code:`MY_PROJECT` below:
 
       .. code-block:: console
@@ -164,7 +164,7 @@ Installation
     3. Make it a Secret_ in your remote repo called ``CODECOV_TOKEN``
 
     4. Your next push to the remote repo  will trigger the test workflow in
-       :file:`.github/workflows/tests.yml` which will then automatically upload
+       ``.github/workflows/tests.yml`` which will then automatically upload
        the coverage report to Codecov_
 
 15. Install and add git pre-commit hooks:
@@ -201,6 +201,17 @@ Distributed under the terms of the `MIT license`_,
 .. _pip: https://pip.pypa.io/
 .. _Hypermodern-Python: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
 .. _cj: https://github.com/cjolowicz
+
+.. _Poetry: https://python-poetry.org/
+.. _Nox: https://nox.thea.codes/
+.. _Pyenv: https://github.com/pyenv/pyenv
+.. _official instructions: https://github.com/pyenv/pyenv/wiki/Common-build-problems
+.. _kebab case: https://en.wiktionary.org/wiki/kebab_case
+.. _python versions: https://www.python.org/downloads/
+.. _Github: https://github.com/
+.. _API-Token: https://pypi.org/help/#apitoken
+.. _Codecov: https://about.codecov.io/
+.. _Secret: https://docs.github.com/en/github-ae@latest/actions/security-guides/encrypted-secrets
 .. github-only
 .. _Contributor Guide: CONTRIBUTING.rst
 .. _Usage: https://hpmpy_project.readthedocs.io/en/latest/usage.html
