@@ -41,7 +41,7 @@ foundation proposed by `Claudio Jolowicz <cj>`_
 Installation
 ------------
 
-Follow the installation guide.
+Follow the `Installation Guide`_.
 
 
 Usage
@@ -71,16 +71,15 @@ If you encounter any problems,
 please `file an issue`_ along with a detailed description.
 
 
-.. _@cjolowicz: https://github.com/cjolowicz
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _Hypermodern-Python: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
+.. _Hypermodern Python Cookiecutter: https://github.com/cjolowicz/cookiecutter-hypermodern-python
+.. _cj: https://github.com/cjolowicz
+
 .. _MIT license: https://opensource.org/licenses/MIT
 .. _PyPI: https://pypi.org/
-.. _Hypermodern Python Cookiecutter: https://github.com/cjolowicz/cookiecutter-hypermodern-python
+
 .. _file an issue: https://github.com/tZ3ma/hpmpy-project/issues
 .. _pip: https://pip.pypa.io/
 .. github-only
 .. _Contributor Guide: CONTRIBUTING.rst
-
-
-.. _Hypermodern-Python: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
-.. _cj: https://github.com/cjolowicz
+.. _Contributor Guide: docs/source/getting_started/installation.rst

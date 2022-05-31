@@ -3,6 +3,9 @@ hpmpy-project
 
 hpmpy-project has been developed for making new hypermodern python projects a blast!
 
+It uses the excellent Hypermodern-Python_ project foundation proposed by
+`Claudio Jolowicz <cj>`_.
+
 .. toctree::
    :maxdepth: 1
    :caption: Getting Started
@@ -42,3 +45,7 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 * :ref:`glossary`
+
+
+.. _Hypermodern-Python: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
+.. _cj: https://github.com/cjolowicz
