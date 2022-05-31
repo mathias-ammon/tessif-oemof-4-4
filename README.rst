@@ -61,7 +61,7 @@ License
 -------
 
 Distributed under the terms of the `MIT license`_,
-*Zettelkasten* is free and open source software.
+*hpmpy-project* is free and open source software.
 
 
 Issues
@@ -80,6 +80,6 @@ please `file an issue`_ along with a detailed description.
 
 .. _file an issue: https://github.com/tZ3ma/hpmpy-project/issues
 .. _pip: https://pip.pypa.io/
-.. github-only
+.. working on github-only
 .. _Contributor Guide: CONTRIBUTING.rst
 .. _Installation Guide: docs/source/getting_started/installation.rst
