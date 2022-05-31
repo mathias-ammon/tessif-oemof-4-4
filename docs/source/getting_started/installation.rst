@@ -129,6 +129,18 @@ Use the following guide to fully take advantage of this project template:
 14. Integrate your PyPI_  and TestPyPI_ API-Token_ as explained in the
     :ref:`release workflow <workflows_releases>` sections.
 
+15. Add coverage reports using Codecov_:
+
+    1. Go to the Codecov_ website and login using your Github_ account.
+
+    2. Click on ``not yet setup`` and copy the API-Token in point 2.
+
+    3. Make it a Secret_ in your remote repo called ``CODECOV_TOKEN``
+
+    4. Your next push to the remote repo  will trigger the test workflow in
+       :file:`.github/workflows/tests.yml` which will then automatically upload
+       the coverage report to Codecov_
+
 15. Install and add git pre-commit hooks:
 
     .. code-block:: console
@@ -226,3 +238,5 @@ This installs the TestPyPI_ version of :code:`MY-PROJECT` while resolving the de
 .. _python versions: https://www.python.org/downloads/
 .. _Github: https://github.com/
 .. _API-Token: https://pypi.org/help/#apitoken
+.. _Codecov: https://about.codecov.io/
+.. _Secret: https://docs.github.com/en/github-ae@latest/actions/security-guides/encrypted-secrets
