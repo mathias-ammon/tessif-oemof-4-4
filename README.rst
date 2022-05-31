@@ -82,4 +82,4 @@ please `file an issue`_ along with a detailed description.
 .. _pip: https://pip.pypa.io/
 .. github-only
 .. _Contributor Guide: CONTRIBUTING.rst
-.. _Contributor Guide: docs/source/getting_started/installation.rst
+.. _Installation Guide: docs/source/getting_started/installation.rst
