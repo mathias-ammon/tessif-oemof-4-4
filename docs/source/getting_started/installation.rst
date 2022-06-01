@@ -183,7 +183,9 @@ Use the following guide to fully take advantage of this project template:
 	  $ git push
 
 
-18. Create accounts on Codacy_ and Codeclimate_
+18. (Optional) Create accounts on Codacy_, Codeclimate_ and Scrutinizer_ for
+    code quality checks using you Github_ account.
+
 19. All done! Make sure to checkout the
     :ref:`Workflows Developer Guide <workflows>` to acquaint yourself with the
     usage of Poetry_, Nox_ and Github_.
@@ -282,3 +284,4 @@ This installs the TestPyPI_ version of :code:`MY-PROJECT` while resolving the de
 .. _Secret: https://docs.github.com/en/github-ae@latest/actions/security-guides/encrypted-secrets
 .. _Codacy: https://docs.codacy.com/
 .. _Codeclimate: https://codeclimate.com/
+.. _Scrutinizer: https://scrutinizer-ci.com/

@@ -43,6 +43,10 @@ hpmpy-project
    :target: https://codeclimate.com/github/tZ3ma/hpmpy-project/maintainability
    :alt: Maintainability
 
+.. |Scrutinizer| image:: https://scrutinizer-ci.com/g/tZ3ma/hpmpy-project/badges/quality-score.png?b=main
+   :target: https://scrutinizer-ci.com/g/tZ3ma/hpmpy-project/
+   :alt: Scrutinizer Code Quality
+
 .. |pre-commit| image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
    :target: https://github.com/pre-commit/pre-commit
    :alt: pre-commit
