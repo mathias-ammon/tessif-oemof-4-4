@@ -70,6 +70,11 @@ Issues
 If you encounter any problems,
 please `file an issue`_ along with a detailed description.
 
+Credits
+-------
+
+This project was created using the `Mathias Ammon <tZ3ma>`_ tweaked version of the
+Hypermodern-Python_ project foundation proposed by `Claudio Jolowicz <cj>`_.
 
 .. _Hypermodern-Python: https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
 .. _Hypermodern Python Cookiecutter: https://github.com/cjolowicz/cookiecutter-hypermodern-python
@@ -80,6 +85,8 @@ please `file an issue`_ along with a detailed description.
 
 .. _file an issue: https://github.com/tZ3ma/hpmpy-project/issues
 .. _pip: https://pip.pypa.io/
+
+.. _tZ3ma: https://github.com/tZ3ma
 .. working on github-only
 .. _Contributor Guide: CONTRIBUTING.rst
 .. _Installation Guide: docs/source/getting_started/installation.rst

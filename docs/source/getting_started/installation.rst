@@ -59,19 +59,18 @@ Use the following guide to fully take advantage of this project template:
       $ pyenv install 3.8.13
 
 
-4. Change into the new project folder and ctivate the desired `python versions`_
+4. Clone the `hpmpy-template` into your new local repo folder:
+
+   .. code-block:: console
+
+      $ git clone https://github.com/tZ3ma/hpmpy-project my-project
+
+5. Change into the new project folder and ctivate the desired `python versions`_
 
    .. code-block:: console
 
       $ cd my-project
       $ pyenv local 3.10.4 3.9.13 3.8.13
-
-
-5. Clone the `hpmpy-template` into your new local repo folder:
-
-   .. code-block:: console
-
-      $ git clone https://github.com/tZ3ma/hpmpy-project my-project
 
 
 6. Install poetry (only if not already present)
@@ -124,6 +123,8 @@ Use the following guide to fully take advantage of this project template:
 
        $ poetry version minor
 
+    Modify the `tests/test_version.py` file accordingly
+
 13. Create a remote repo on Github_
 
 14. Integrate your PyPI_  and TestPyPI_ API-Token_ as explained in the
@@ -154,14 +155,39 @@ Use the following guide to fully take advantage of this project template:
 
        $ git add -A
        $ git commit -m "Project Initialization"
-       $ git remote add origin https://github.com/GIT-USER/MY-PROJECT.git
+       $ git remote set-url origin https://github.com/GIT-USER/MY-PROJECT.git
        $ git branch -M main
        $ git push -u origin main
 
-17. All set up! You can now branch of your default branch
+17. All set up! Now branch of your **main** branch to create the **develop**
+    branch and add first implementations:
 
-18. Make sure to checkout the :ref:`Workflows Developer Guide <workflows>` to
-    acquaint yourself with the usage of Poetry_, Nox_ and Github_.
+    A. Create switch to new develop branch:
+
+       .. code-block:: console
+
+          $ git checkout -b develop
+
+    B. Modify the ``README.rst``, ``docs/index.rst`` and
+       the ``docs/source/getting_started/installation.rst`` files to refelct
+       your project description.
+
+    C. Add sub-packages and/or modules to the ``src/strutils/`` folder
+
+    D. Add, commit and push all changes/addition to your remote repo
+
+       .. code-block:: console
+
+          $ git add -A
+	  $ git commit -m "Initial Implementation"
+	  $ git push
+
+
+18. All done! Make sure to checkout the
+    :ref:`Workflows Developer Guide <workflows>` to acquaint yourself with the
+    usage of Poetry_, Nox_ and Github_.
+
+
 
 
 
@@ -178,20 +204,33 @@ Development Install of Your Package Created with this Template
 
       $ git clone https://github.com/tZ3ma/hpmpy-project [hpmpy-project-develop]
 
-4. Install the package with development requirements:
+4. Change to the new local repo folder and activate the desired
+   `python versions`_ using pyenv:
+
+   .. code-block:: console
+
+      $ ccd strutils
+
+      $ pyenv install 3.10.4 (adjust version to your needs)
+      $ pyenv install 3.9.13 (optional)
+      $ pyenv install 3.8.13 (optional)
+
+      $ pyenv local 3.10.4 3.9.13 3.8.13 (activate those desired)
+
+5. Install the package with development requirements:
 
    .. code:: console
 
       $ poetry install
 
-5. Auto generate and activate a virtual environment where the installed package
+56 Auto generate and activate a virtual environment where the installed package
    is installed:
 
    .. code:: console
 
       $ poetry shell
 
-6. (Optional) Alternatively, you can now run an interactive Python session, or
+7. (Optional) Alternatively, you can now run an interactive Python session, or
    the command-line interface if your package supports it:
 
    .. code:: console
