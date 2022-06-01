@@ -3,7 +3,7 @@ hpmpy-project
 
 |PyPI| |Status| |Python Version| |License|
 
-|Read the Docs| |Tests| |Codecov| |Codacy| |Codeclimate|
+|Read the Docs| |Tests| |Codecov| |Codacy| |Codeclimate| |Scrutinizer|
 
 |pre-commit| |Black|
 
