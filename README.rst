@@ -35,9 +35,9 @@ hpmpy-project
    :target: https://codecov.io/gh/tZ3ma/hpmpy_project
    :alt: Codecov
 
-.. |Codacy| image:: https://www.codacy.com/gh/tZ3ma/hpmpy-project/dashboard?utm_source=github.com&utm_medium=referral&utm_content=tZ3ma/hpmpy-project&utm_campaign=Badge_Grade
-    :target: https://app.codacy.com/gh/tZ3ma/hpmpy-project/dashboard
-    :alt: Codacy Code Quality Status
+.. |Codacy| image:: https://app.codacy.com/project/badge/Grade/b278433bb9224147a2e6231d783b62e4
+   :target: https://app.codacy.com/gh/tZ3ma/hpmpy-project/dashboard
+   :alt: Codacy Code Quality Status
 
 .. |Codeclimate| image:: https://api.codeclimate.com/v1/badges/ff119252f0bb7f40aecb/maintainability
    :target: https://codeclimate.com/github/tZ3ma/hpmpy-project/maintainability
