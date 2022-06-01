@@ -1,5 +1,6 @@
 # tests/test_connectivity.py
-"""Module for testing connectivity.
+"""
+Module for testing connectivity.
 
 Meant to serve as template in case outgoing connections are to be tested.
 """

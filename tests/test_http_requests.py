@@ -1,5 +1,6 @@
 # tests/test_http_requests.py
-"""Module to test https request calls using the request package.
+"""
+Module to test https request calls using the request package.
 
 Targets are mostly mocked using pytest-mock plugin::
 
@@ -46,7 +47,8 @@ def request_rnd_wiki_artcl():
 
 
 def test_mock_gets_called(mock_requests_get, request_rnd_wiki_artcl):
-    """Assert the requests.get was actually called.
+    """
+    Assert the requests.get was actually called.
 
     random_wiki_article gets called by fixutre wrap around mock object so
     the mock object is "requests.get" instead of the url.
@@ -72,7 +74,8 @@ def test_mock_result_inspection(mock_requests_get, request_rnd_wiki_artcl):
 
 
 def test_mock_param_call_inspection(mock_requests_get, request_rnd_wiki_artcl):
-    """Assert the requests.get was called properly.
+    """
+    Assert the requests.get was called properly.
 
     Random_wiki_article gets called by fixutre wrap around mock object so
     the mock object is "requests.get" instead of the url.

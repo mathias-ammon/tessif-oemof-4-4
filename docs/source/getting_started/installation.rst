@@ -183,7 +183,8 @@ Use the following guide to fully take advantage of this project template:
 	  $ git push
 
 
-18. All done! Make sure to checkout the
+18. Create accounts on Codacy_ and Codeclimate_
+19. All done! Make sure to checkout the
     :ref:`Workflows Developer Guide <workflows>` to acquaint yourself with the
     usage of Poetry_, Nox_ and Github_.
 
@@ -236,7 +237,7 @@ Development Install of Your Package Created with this Template
    .. code:: console
 
       $ poetry run python
-      $ poetry run MY-PROJECT
+      $ poetry run hpmpy-project
 
 
 User Install of  Your Package Created with this Template
@@ -256,14 +257,14 @@ Latest Stable Version
 ^^^^^^^^^^^^^^^^^^^^^
 .. code-block:: console
 
-   $ pip install MY-PROJECT
+   $ pip install hpmpy-project
 
 Latest Development Version (potentially unstable)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 
-   $ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ MY-PROJECT
+   $ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ hpmpy-project
 
 This installs the TestPyPI_ version of :code:`MY-PROJECT` while resolving the dependencies on PyPI_.
 
@@ -279,3 +280,5 @@ This installs the TestPyPI_ version of :code:`MY-PROJECT` while resolving the de
 .. _API-Token: https://pypi.org/help/#apitoken
 .. _Codecov: https://about.codecov.io/
 .. _Secret: https://docs.github.com/en/github-ae@latest/actions/security-guides/encrypted-secrets
+.. _Codacy: https://docs.codacy.com/
+.. _Codeclimate: https://codeclimate.com/
