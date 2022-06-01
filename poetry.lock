@@ -621,7 +621,7 @@ test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
 name = "sphinx-paramlinks"
-version = "0.5.2"
+version = "0.5.4"
 description = "Allows param links in Sphinx function/method descriptions to be linkable"
 category = "dev"
 optional = false
@@ -1137,7 +1137,7 @@ sphinx = [
     {file = "Sphinx-4.5.0.tar.gz", hash = "sha256:7bf8ca9637a4ee15af412d1a1d9689fec70523a68ca9bb9127c2f3eeb344e2e6"},
 ]
 sphinx-paramlinks = [
-    {file = "sphinx-paramlinks-0.5.2.tar.gz", hash = "sha256:51b3ecca66de5c063e97019eb354eec17a657f424a00357a04ee981c80ad5be9"},
+    {file = "sphinx-paramlinks-0.5.4.tar.gz", hash = "sha256:9f7bffa9f4197aa60369058c0a13ca5e7aa938e84c0643e300d341bbe2f4958a"},
 ]
 sphinxcontrib-applehelp = [
     {file = "sphinxcontrib-applehelp-1.0.2.tar.gz", hash = "sha256:a072735ec80e7675e3f432fcae8610ecf509c5f1869d17e2eecff44389cdbc58"},

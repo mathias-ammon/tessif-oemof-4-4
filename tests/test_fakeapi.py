@@ -1,5 +1,6 @@
 # tests/test_fakeapi.py
-"""Module to test fake api usage.
+"""
+Module to test fake api usage.
 
 Meant to serve as template in case the package uses non-local database.
 """
@@ -18,12 +19,13 @@ class FakeAPI:
 
     def shutdown(self):
         """Expensive shutdown operation."""
-        return "expensive shutdown"
+        return f"{self.url} performs expensive shutdown"
 
 
 @pytest.fixture(scope="session")
 def fake_api():
-    """Yield api inerface when needed.
+    """
+    Yield api inerface when needed.
 
     Scope set to session, to only create once per test session.
 

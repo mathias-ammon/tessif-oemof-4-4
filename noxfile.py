@@ -176,7 +176,8 @@ def codecov(session):
 
 
 def activate_virtualenv_in_precommit_hooks(session):
-    """Activate virtualenv in hooks installed by pre-commit.
+    """
+    Activate virtualenv in hooks installed by pre-commit.
 
     This function patches git hooks installed by pre-commit to activate the
     session's virtual environment. This allows pre-commit to locate hooks in
