@@ -7,32 +7,32 @@ hpmpy-project
 
 |pre-commit| |Black|
 
-.. |PyPI| image:: https://img.shields.io/pypi/v/hpmpy_project.svg
-   :target: https://pypi.org/project/hpmpy_project/
+.. |PyPI| image:: https://img.shields.io/pypi/v/hpmpy-project.svg
+   :target: https://pypi.org/project/hpmpy-project/
    :alt: PyPI
 
-.. |Status| image:: https://img.shields.io/pypi/status/hpmpy_project.svg
-   :target: https://pypi.org/project/hpmpy_project/
+.. |Status| image:: https://img.shields.io/pypi/status/hpmpy-project.svg
+   :target: https://pypi.org/project/hpmpy-project/
    :alt: Status
 
-.. |Python Version| image:: https://img.shields.io/pypi/pyversions/hpmpy_project
-   :target: https://pypi.org/project/hpmpy_project
+.. |Python Version| image:: https://img.shields.io/pypi/pyversions/hpmpy-project
+   :target: https://pypi.org/project/hpmpy-project
    :alt: Python Version
 
-.. |License| image:: https://img.shields.io/pypi/l/hpmpy_project
+.. |License| image:: https://img.shields.io/pypi/l/hpmpy-project
    :target: https://opensource.org/licenses/MIT
    :alt: License
 
-.. |Read the Docs| image:: https://img.shields.io/readthedocs/hpmpy_project/latest.svg?label=Read%20the%20Docs
-   :target: https://hpmpy_project.readthedocs.io/
-   :alt: Read the documentation at https://hpmpy_project.readthedocs.io/
+.. |Read the Docs| image:: https://img.shields.io/readthedocs/hpmpy-project/latest.svg?label=Read%20the%20Docs
+   :target: https://hpmpy-project.readthedocs.io/
+   :alt: Read the documentation at https://hpmpy-project.readthedocs.io/
 
-.. |Tests| image:: https://github.com/tZ3ma/hpmpy_project/workflows/Tests/badge.svg
-   :target: https://github.com/tZ3ma/hpmpy_project/actions?workflow=Tests
+.. |Tests| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Tests/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Tests
    :alt: Tests
 
-.. |Codecov| image:: https://codecov.io/gh/tZ3ma/hpmpy_project/branch/main/graph/badge.svg
-   :target: https://codecov.io/gh/tZ3ma/hpmpy_project
+.. |Codecov| image:: https://codecov.io/gh/tZ3ma/hpmpy-project/branch/main/graph/badge.svg
+   :target: https://codecov.io/gh/tZ3ma/hpmpy-project
    :alt: Codecov
 
 .. |Codacy| image:: https://app.codacy.com/project/badge/Grade/b278433bb9224147a2e6231d783b62e4

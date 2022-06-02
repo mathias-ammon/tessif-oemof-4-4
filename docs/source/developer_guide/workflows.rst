@@ -75,6 +75,60 @@ Run all unittests using nox:
 
    nox -s tests
 
+nox -r tests \-\- -m MARKER  -- Run specificly marked tests, excluded by default
+--------------------------------------------------------------------------------
+
+Unittests can be marked by adding a ``@pytest.mark.MARKER`` decorator as for
+example in :file:`tests/test_connectivity.py`::
+
+  @pytest.mark.con
+  def test_wikipedia_connectivity(request_random_wiki_article):
+    """Try reaching the wikipedia site to get a random article."""
+    answer = request_random_wiki_article
+    print(answer)
+    assert "Error" not in answer
+
+These markers can be explicitly run by passsing the ``-m MARKER`` option to
+the nox session as in::
+
+  nox -s tests -- -m MARKER
+
+This templates supports following markers by default:
+
+  - ``con`` -- Marks interernet connection attempts
+  - ``e2e`` -- Marks end 2 end tests
+  - ``slow`` - Marks particularly slow tests
+
+These markers are **excluded** from the default :code:`nox -s test` session
+(which also gets invoked by just calling :code:`nox`). These are thus also
+excluded from the *Tests* CI-Workflow in :file:`.github/workflows/tests.yml`.
+To modify this behavior or exclude additional markers modify the
+:code:`"not e2e and not con and not slow",` line inside the
+:file:`noxfile.py`::
+  @nox.session(python="3.10")
+  def tests(session):
+      """Run test suite."""
+      args = session.posargs or [
+          "--cov",
+          "-m",
+          "not e2e and not con and not slow",
+          # append exlcuded markers as "and not ..."
+      ]
+      session.run("poetry", "install", "--no-dev", external=True)
+      install_with_constraints(
+          session,
+          "coverage[toml]",
+          "pytest",
+          "pytest-cov",
+          "pytest-mock",
+      )
+      session.run("pytest", *args)
+
+So to test one of them run e.g.::
+
+  nox -s tests ---m con
+
+
 nox -s xdoctests -- Doctests
 ----------------------------
 Me personally, I love doctests. I thinks they are the most natural form of

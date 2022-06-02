@@ -1,6 +1,5 @@
 # tests/test_http_requests.py
-"""
-Module to test https request calls using the request package.
+"""Module to test https request calls using the request package.
 
 Targets are mostly mocked using pytest-mock plugin::
 
@@ -64,11 +63,19 @@ def test_mock_gets_called(mock_requests_get, request_rnd_wiki_artcl):
     request_rnd_wiki_artcl
         request_random_wiki_article fixture from above
     """
+    # pylint: disable=unused-argument
+    # disabled here since the fixture is needed for successful mocking
+    # but unsued in the traditional argument sense of a = b; print(2*a)
+
     assert mock_requests_get.called
 
 
 def test_mock_result_inspection(mock_requests_get, request_rnd_wiki_artcl):
     """Test successful mock result inspection."""
+    # pylint: disable=unused-argument
+    # disabled here since the fixture is needed for successful mocking
+    # but unsued in the traditional argument sense of a = b; print(2*a)
+
     http_json_response = request_rnd_wiki_artcl
     assert "Lorem Ipsum" in http_json_response["title"]
 
@@ -90,19 +97,23 @@ def test_mock_param_call_inspection(mock_requests_get, request_rnd_wiki_artcl):
     request_rnd_wiki_artcl
         request_random_wiki_article fixture from above
     """
+    # pylint: disable=unused-argument
+    # disabled here since the fixture is needed for successful mocking
+    # but unsued in the traditional argument sense of a = b; print(2*a)
+
     args, _ = mock_requests_get.call_args
     assert "en.wikipedia.org" in args[0]
 
 
 def test_fail_on_request_error(mock_requests_get, request_rnd_wiki_artcl):
     """Test on failing the https request."""
+    # pylint: disable=unused-argument
+    # disabled here since the fixture is needed for successful mocking
+    # but unsued in the traditional argument sense of a = b; print(2*a)
+
     mock_requests_get.side_effect = requests.RequestException
 
     api_url = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
     mock_response = request_url(api_url)
 
     assert "Error" in mock_response
-
-
-# continue with end to end tests and actual connectivity tests
-# continue with data base FAKES

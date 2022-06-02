@@ -44,7 +44,7 @@ def tests(session):
         "--cov",
         "-m",
         "not e2e and not con and not slow",
-        # add markers as "and not ..."
+        # append exlcuded markers as "and not ..."
     ]
     session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(
@@ -176,8 +176,7 @@ def codecov(session):
 
 
 def activate_virtualenv_in_precommit_hooks(session):
-    """
-    Activate virtualenv in hooks installed by pre-commit.
+    """Activate virtualenv in hooks installed by pre-commit.
 
     This function patches git hooks installed by pre-commit to activate the
     session's virtual environment. This allows pre-commit to locate hooks in
