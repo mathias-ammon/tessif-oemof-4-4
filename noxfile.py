@@ -44,7 +44,7 @@ def tests(session):
         "--cov",
         "-m",
         "not e2e and not con and not slow",
-        # add markers as "and not ..."
+        # append exlcuded markers as "and not ..."
     ]
     session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(

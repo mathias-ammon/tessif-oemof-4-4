@@ -63,6 +63,7 @@ def test_mock_gets_called(mock_requests_get, request_rnd_wiki_artcl):
     request_rnd_wiki_artcl
         request_random_wiki_article fixture from above
     """
+    # pylint: disable=unused-argument
     assert mock_requests_get.called
 
 
@@ -101,7 +102,3 @@ def test_fail_on_request_error(mock_requests_get, request_rnd_wiki_artcl):
     mock_response = request_url(api_url)
 
     assert "Error" in mock_response
-
-
-# continue with end to end tests and actual connectivity tests
-# continue with data base FAKES
