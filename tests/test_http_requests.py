@@ -1,6 +1,5 @@
 # tests/test_http_requests.py
-"""
-Module to test https request calls using the request package.
+"""Module to test https request calls using the request package.
 
 Targets are mostly mocked using pytest-mock plugin::
 

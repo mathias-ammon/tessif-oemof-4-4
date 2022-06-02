@@ -1,6 +1,5 @@
 # tests/test_end2end.py
-"""
-Module for end2end testing.
+"""Module for end2end testing.
 
 Meant to serve as template in case end2end tesing is sensible.
 Uses pytest markers to require manual test inclusion.

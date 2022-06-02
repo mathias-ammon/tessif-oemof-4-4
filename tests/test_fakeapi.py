@@ -1,6 +1,5 @@
 # tests/test_fakeapi.py
-"""
-Module to test fake api usage.
+"""Module to test fake api usage.
 
 Meant to serve as template in case the package uses non-local database.
 """
