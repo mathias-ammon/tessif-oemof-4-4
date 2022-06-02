@@ -11,7 +11,7 @@ Meant to serve as template in case the package uses url based api calls.
 import pytest
 import requests
 
-from .test_connectivity import request_url as request_url
+from .test_connectivity import request_url
 
 
 @pytest.fixture
