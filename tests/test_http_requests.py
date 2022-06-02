@@ -11,17 +11,7 @@ Meant to serve as template in case the package uses url based api calls.
 import pytest
 import requests
 
-
-def request_url(url):
-    """With wrapper to requests.get."""
-    try:
-        with requests.get(url) as response:
-            response.raise_for_status()
-            return response
-
-    except requests.RequestException:
-        message = "Error: request_url failed."
-        return message
+from .test_connectivity import request_url as request_url
 
 
 @pytest.fixture

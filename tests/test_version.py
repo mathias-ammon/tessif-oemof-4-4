@@ -5,4 +5,4 @@ from hpmpy_project import __version__
 
 def test_verssion_access():
     """Test for correct package version."""
-    assert __version__ == "0.0.2"
+    assert __version__ == "0.0.4"
