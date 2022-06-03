@@ -15,6 +15,7 @@ import nox
 nox.options.sessions = (
     "pre-commit",
     "lint",
+    "pylint",
     "tests",
     "xdoctest",
     "safety",
@@ -87,6 +88,7 @@ def lint(session):
 def pylint(session):
     """Lint using pylint."""
     args = session.posargs or locations
+    session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(
         session,
         "pytest",
@@ -94,7 +96,7 @@ def pylint(session):
         "nox",
         "pylint",
     )
-    session.run("pylint", "--output-format=colorized", *args)
+    session.run("pylint", "--output-format=colorized", "--recursive=y", *args)
 
 
 @nox.session(python="3.10")
@@ -192,6 +194,7 @@ def codecov(session):
 def precommit(session):
     """Lint using pre-commit."""
     args = session.posargs or ["run", "--all-files", "--show-diff-on-failure"]
+    session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(
         session,
         "darglint",
