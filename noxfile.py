@@ -17,6 +17,7 @@ nox.options.sessions = (
     "lint",
     "tests",
     "xdoctest",
+    "safety",
     "docs_rebuild",
 )
 
@@ -79,8 +80,21 @@ def lint(session):
         "pre-commit-hooks",
         "pyupgrade",
     )
-    # installs flak8 when 'nox -rs lint' is called
     session.run("flake8", *args)
+
+
+@nox.session(python="3.10")
+def pylint(session):
+    """Lint using pylint."""
+    args = session.posargs or locations
+    install_with_constraints(
+        session,
+        "pytest",
+        "requests",
+        "nox",
+        "pylint",
+    )
+    session.run("pylint", "--output-format=colorized", *args)
 
 
 @nox.session(python="3.10")
@@ -193,6 +207,10 @@ def precommit(session):
         "pre-commit",
         "pre-commit-hooks",
         "pyupgrade",
+        "pytest",
+        "requests",
+        "nox",
+        "pylint",
     )
     session.run("pre-commit", *args)
 

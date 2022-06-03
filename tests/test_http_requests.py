@@ -13,6 +13,10 @@ import requests
 
 from .test_connectivity import request_url
 
+# pylint: disable=redefined-outer-name
+# disabled here, sind redefinition is how fixtures work and they are used here
+# extensively
+
 
 @pytest.fixture
 def mock_requests_get(mocker):

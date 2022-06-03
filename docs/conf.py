@@ -1,4 +1,5 @@
 # docs/conf.py
+# pylint: disable=invalid-name
 """Sphinx configuration."""
 
 # Configuration file for the Sphinx documentation builder.
@@ -6,6 +7,8 @@
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+# pylint flag is added because sphinx needs lowercase attributes.
 
 # -- Path setup --------------------------------------------------------------
 
@@ -32,7 +35,7 @@ print(sys.path)
 
 project = "hpmpy_project - Hypermodern Python Project Template"
 author = "Mathias Ammon"
-copyright = f"2022, {author}"
+copyright = f"2022, {author}"  # pylint: disable=redefined-builtin
 
 extensions = [
     "sphinx.ext.autodoc",  # enable docstring documentation

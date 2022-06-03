@@ -4,17 +4,18 @@ repos:
     rev: v2.4.1
     hooks:
       - id: prettier
+        name: Yaml formatting using prettier
   - repo: local
     hooks:
       - id: black
-        name: black
+        name: Code formatting using black
         description: Format code using black
         entry: poetry run black
         language: system
         types: [python]
         require_serial: true
       - id: flake8
-        name: flake8
+        name: Linting using flake8
         description: Use flake8 for code improvements.
         entry: poetry run flake8
         language: system
@@ -55,3 +56,9 @@ repos:
         language: system
         types: [text]
         stages: [commit, push, manual]
+      - id: pylint
+        name: Linting using pylint
+        entry: poetry run pylint
+        language: system
+        types: [python]
+        args: [--output-format=colorized]

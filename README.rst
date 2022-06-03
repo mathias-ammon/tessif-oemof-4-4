@@ -1,11 +1,13 @@
 hpmpy-project
 ====================================================================================================
 
-|PyPI| |Status| |Python Version| |License|
+|PyPI| |Python Version| |License|
 
-|Read the Docs| |Tests| |Codecov| |Codacy| |Codeclimate| |Scrutinizer|
+|Status| |Read the Docs| |Tests| |Safety|
 
-|pre-commit| |Black|
+|Codecov| |Codacy| |Codeclimate| |Scrutinizer|
+
+|pre-commit| |Black| |Pylint|
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/hpmpy-project.svg
    :target: https://pypi.org/project/hpmpy-project/
@@ -31,6 +33,10 @@ hpmpy-project
    :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Tests
    :alt: Tests
 
+.. |Safety| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Safety/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Safety
+   :alt: Tests
+
 .. |Codecov| image:: https://codecov.io/gh/tZ3ma/hpmpy-project/branch/main/graph/badge.svg
    :target: https://codecov.io/gh/tZ3ma/hpmpy-project
    :alt: Codecov
@@ -54,6 +60,11 @@ hpmpy-project
 .. |Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/psf/black
    :alt: Black
+
+.. |Pylint| image:: https://img.shields.io/badge/linting-pylint-yellowgreen
+   :target: https://github.com/PyCQA/pylint
+   :alt: Package uses pylint
+
 
 Newb tweaked non-typing version of the excellent Hypermodern-Python_ project
 foundation proposed by `Claudio Jolowicz <cj>`_
