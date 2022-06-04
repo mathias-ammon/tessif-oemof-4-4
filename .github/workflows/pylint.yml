@@ -1,8 +1,8 @@
-# .github/workflows/tests.yml
-name: Tests
+# .github/workflows/pylint.yml
+name: Pylinting
 on: push
 jobs:
-  tests:
+  pylint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,4 +12,4 @@ jobs:
           architecture: x64
       - run: pip install nox==2022.1.7
       - run: pip install poetry==1.1.12
-      - run: nox
+      - run: nox --sessions pylint

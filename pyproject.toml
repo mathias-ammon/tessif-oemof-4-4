@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hpmpy-project"
-version = "0.0.4"
+version = "0.0.5"
 description = "Tweaked Hypermodern Python Project Template w/o Typing"
 authors = ["Mathias Ammon <mathias.ammon@tuhh.de>"]
 license = "MIT"
@@ -30,6 +30,8 @@ Sphinx = "^4.5.0"
 pep8-naming = "^0.12.1"
 pyupgrade = "^2.32.1"
 sphinx-paramlinks = "^0.5.2"
+pylint = "^2.14.0"
+nox = "^2022.1.7"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]

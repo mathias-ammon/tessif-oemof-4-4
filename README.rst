@@ -1,11 +1,13 @@
 hpmpy-project
 ====================================================================================================
 
-|PyPI| |Status| |Python Version| |License|
+|PyPI| |Python Version| |License|
 
-|Read the Docs| |Tests| |Codecov| |Codacy| |Codeclimate| |Scrutinizer|
+|Status| |Read the Docs| |Tests| |Safety| |Pylinting| |Flake8 Linting| |Pre-Commit|
 
-|pre-commit| |Black|
+|Codecov| |Codacy| |Codeclimate| |Scrutinizer|
+
+|pre-commit| |Black| |Pylint| |Flake8|
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/hpmpy-project.svg
    :target: https://pypi.org/project/hpmpy-project/
@@ -29,7 +31,23 @@ hpmpy-project
 
 .. |Tests| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Tests/badge.svg
    :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Tests
-   :alt: Tests
+   :alt: Tests Workflow Status
+
+.. |Safety| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Safety/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Safety
+   :alt: Safety Workflow Status
+
+.. |Pylinting| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Pylinting/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Pylinting
+   :alt: Pylint Workflow Status
+
+.. |Flake8 Linting| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Flake8-Linting/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Flake8-Linting
+   :alt: Flake8-Linting Workflow Status
+
+.. |Pre-Commit| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Pre-Commit/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Pre-Commit
+   :alt: Pre-Commit Workflow Status
 
 .. |Codecov| image:: https://codecov.io/gh/tZ3ma/hpmpy-project/branch/main/graph/badge.svg
    :target: https://codecov.io/gh/tZ3ma/hpmpy-project
@@ -54,6 +72,15 @@ hpmpy-project
 .. |Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/psf/black
    :alt: Black
+
+.. |Pylint| image:: https://img.shields.io/badge/linting-pylint-yellowgreen
+   :target: https://github.com/PyCQA/pylint
+   :alt: Package uses pylint
+
+.. |Flake8| image:: https://img.shields.io/badge/linting-flake8-yellogreen
+   :target: https://github.com/pycqa/flake8
+   :alt: Package uses flake8
+
 
 Newb tweaked non-typing version of the excellent Hypermodern-Python_ project
 foundation proposed by `Claudio Jolowicz <cj>`_

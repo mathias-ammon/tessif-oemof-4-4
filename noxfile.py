@@ -15,8 +15,10 @@ import nox
 nox.options.sessions = (
     "pre-commit",
     "lint",
+    "pylint",
     "tests",
     "xdoctest",
+    "safety",
     "docs_rebuild",
 )
 
@@ -79,8 +81,22 @@ def lint(session):
         "pre-commit-hooks",
         "pyupgrade",
     )
-    # installs flak8 when 'nox -rs lint' is called
     session.run("flake8", *args)
+
+
+@nox.session(python="3.10")
+def pylint(session):
+    """Lint using pylint."""
+    args = session.posargs or locations
+    session.run("poetry", "install", "--no-dev", external=True)
+    install_with_constraints(
+        session,
+        "pytest",
+        "requests",
+        "nox",
+        "pylint",
+    )
+    session.run("pylint", "--output-format=colorized", "--recursive=y", *args)
 
 
 @nox.session(python="3.10")
@@ -178,6 +194,7 @@ def codecov(session):
 def precommit(session):
     """Lint using pre-commit."""
     args = session.posargs or ["run", "--all-files", "--show-diff-on-failure"]
+    session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(
         session,
         "darglint",
@@ -193,6 +210,10 @@ def precommit(session):
         "pre-commit",
         "pre-commit-hooks",
         "pyupgrade",
+        "pytest",
+        "requests",
+        "nox",
+        "pylint",
     )
     session.run("pre-commit", *args)
 

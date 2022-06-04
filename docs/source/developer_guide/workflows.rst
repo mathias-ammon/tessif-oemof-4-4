@@ -105,6 +105,7 @@ excluded from the *Tests* CI-Workflow in :file:`.github/workflows/tests.yml`.
 To modify this behavior or exclude additional markers modify the
 :code:`"not e2e and not con and not slow",` line inside the
 :file:`noxfile.py`::
+
   @nox.session(python="3.10")
   def tests(session):
       """Run test suite."""
