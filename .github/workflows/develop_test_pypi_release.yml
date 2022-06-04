@@ -1,11 +1,11 @@
-# .github/workflows/test-pypi.yml
-name: TestPyPI
+# .github/workflows/develop_test_pypi_release.yml
+name: TestPyPI Develop Release
 on:
   push:
     branches:
       - develop
 jobs:
-  test_pypi:
+  test_pypi_release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

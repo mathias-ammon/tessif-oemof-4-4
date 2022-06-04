@@ -1,8 +1,8 @@
-# .github/workflows/coverage.yml
-name: Coverage
+# .github/workflows/flake8_lint.yml
+name: Flake8-Linting
 on: push
 jobs:
-  coverage:
+  flake8_lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,6 +12,4 @@ jobs:
           architecture: x64
       - run: pip install nox==2022.1.7
       - run: pip install poetry==1.1.12
-      - run: nox --sessions tests xdoctest codecov
-        env:
-          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+      - run: nox --sessions lint

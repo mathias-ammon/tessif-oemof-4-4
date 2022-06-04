@@ -1,11 +1,11 @@
-# .github/workflows/pypi.yml
-name: PyPI
+# .github/workflows/stable_pypi_release.yml
+name: Stable PyPI Release
 on:
   release:
     types: [published]
 
 jobs:
-  pypi:
+  pypi_release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
