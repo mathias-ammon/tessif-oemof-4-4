@@ -27,12 +27,12 @@ hpmpy-project
    :target: https://pypi.org/project/hpmpy-project/
    :alt: Status
 
-.. |Stable Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Stable\ PyPI\ Release/badge.svg
-   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Stable\ PyPI\ Release
+.. |Stable Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Stable-PyPI-Release/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Stable-PyPI-Release
    :alt: Stable PyPI Release Workflow Status
 
-.. |Develop Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/TestPyPI\ Develop\ Release/badge.svg
-   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=TestPyPI Develop Release
+.. |Develop Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Develop-TestPyPI-Release/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Develop-TestPyPI-Release
    :alt: Develop TestPyPI Release Workflow Status
 
 .. |Read the Docs| image:: https://img.shields.io/readthedocs/hpmpy-project/latest.svg?label=Read%20the%20Docs
