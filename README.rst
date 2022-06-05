@@ -1,9 +1,11 @@
 hpmpy-project
 ====================================================================================================
 
-|PyPI| |Python Version| |License|
+|PyPI| |Python Version| |License| |Status|
 
-|Status| |Read the Docs| |Tests| |Safety| |Pylinting| |Flake8 Linting| |Pre-Commit|
+|Stable Release| |Develop Release|
+
+|Read the Docs| |Tests| |Safety| |Pylinting| |Flake8 Linting| |Pre-Commit|
 
 |Codecov| |Codacy| |Codeclimate| |Scrutinizer|
 
@@ -13,10 +15,6 @@ hpmpy-project
    :target: https://pypi.org/project/hpmpy-project/
    :alt: PyPI
 
-.. |Status| image:: https://img.shields.io/pypi/status/hpmpy-project.svg
-   :target: https://pypi.org/project/hpmpy-project/
-   :alt: Status
-
 .. |Python Version| image:: https://img.shields.io/pypi/pyversions/hpmpy-project
    :target: https://pypi.org/project/hpmpy-project
    :alt: Python Version
@@ -24,6 +22,18 @@ hpmpy-project
 .. |License| image:: https://img.shields.io/pypi/l/hpmpy-project
    :target: https://opensource.org/licenses/MIT
    :alt: License
+
+.. |Status| image:: https://img.shields.io/pypi/status/hpmpy-project.svg
+   :target: https://pypi.org/project/hpmpy-project/
+   :alt: Status
+
+.. |Stable Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Stable-PyPI-Release/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Stable-PyPI-Release
+   :alt: Stable PyPI Release Workflow Status
+
+.. |Develop Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Develop-TestPyPI-Release/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Develop-TestPyPI-Release
+   :alt: Develop TestPyPI Release Workflow Status
 
 .. |Read the Docs| image:: https://img.shields.io/readthedocs/hpmpy-project/latest.svg?label=Read%20the%20Docs
    :target: https://hpmpy-project.readthedocs.io/
@@ -88,26 +98,26 @@ foundation proposed by `Claudio Jolowicz <cj>`_
 Installation
 ------------
 
-Follow the `Installation Guide`_.
+Please see the `Installation Guide`_ (`Github Repo Link`_) for details.
 
 
 Usage
 -----
 
-Please see the `Command-line Reference <Usage_>`_ for details.
+Please see the `Worklow Reference <Workflow-Guide_>`_ (`Github Repo Link`_) for details.
 
 
 Contributing
 ------------
 
 Contributions are very welcome.
-To learn more, see the `Contributor Guide`_.
+To learn more, see the `Contributor Guide`_ (`Github Repo Link`_).
 
 
 License
 -------
 
-Distributed under the terms of the `MIT license`_,
+Distributed under the terms of the `MIT license`_ (`Github Repo Link`_),
 *hpmpy-project* is free and open source software.
 
 
@@ -137,3 +147,6 @@ Hypermodern-Python_ project foundation proposed by `Claudio Jolowicz <cj>`_.
 .. working on github-only
 .. _Contributor Guide: CONTRIBUTING.rst
 .. _Installation Guide: docs/source/getting_started/installation.rst
+.. _Workflow-Guide: docs/source/developer_guide/workflows.rst
+
+.. _Github Repo Link: https://github.com/tZ3ma/hpmpy-project

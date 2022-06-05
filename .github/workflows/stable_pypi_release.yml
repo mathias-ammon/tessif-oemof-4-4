@@ -1,5 +1,5 @@
 # .github/workflows/stable_pypi_release.yml
-name: Stable PyPI Release
+name: Stable-PyPI-Release
 on:
   release:
     types: [published]

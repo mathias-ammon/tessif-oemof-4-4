@@ -1,5 +1,5 @@
 # .github/workflows/develop_test_pypi_release.yml
-name: TestPyPI Develop Release
+name: Develop-TestPyPI-Release
 on:
   push:
     branches:
