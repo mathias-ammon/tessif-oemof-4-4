@@ -98,26 +98,26 @@ foundation proposed by `Claudio Jolowicz <cj>`_
 Installation
 ------------
 
-Follow the `Installation Guide`_.
+Please see the `Installation Guide`_ (`Github Repo Link`_) for details.
 
 
 Usage
 -----
 
-Please see the `Command-line Reference <Usage_>`_ for details.
+Please see the `Worklow Reference <Workflow-Guide_>`_ (`Github Repo Link`_) for details.
 
 
 Contributing
 ------------
 
 Contributions are very welcome.
-To learn more, see the `Contributor Guide`_.
+To learn more, see the `Contributor Guide`_ (`Github Repo Link`_).
 
 
 License
 -------
 
-Distributed under the terms of the `MIT license`_,
+Distributed under the terms of the `MIT license`_ (`Github Repo Link`_),
 *hpmpy-project* is free and open source software.
 
 
@@ -147,3 +147,6 @@ Hypermodern-Python_ project foundation proposed by `Claudio Jolowicz <cj>`_.
 .. working on github-only
 .. _Contributor Guide: CONTRIBUTING.rst
 .. _Installation Guide: docs/source/getting_started/installation.rst
+.. _Workflow-Guide: docs/source/developer_guide/workflows.rst
+
+.. _Github Repo Link: https://github.com/tZ3ma/hpmpy-project

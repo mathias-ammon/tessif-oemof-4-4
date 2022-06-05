@@ -142,6 +142,19 @@ Run all doctests using nox:
 
    nox -s xdoctests
 
+
+Committing
+==========
+
+After new code is added and all tests are passed, following is the usua workflow:
+
+1. Run Black_ to format your code :code:`nox -s black`
+2. Stage your changes using :code:`git add`
+3. Run the pre-commit_ session to test lint and format your package using
+   :code:`nox -s pre-commit`
+4. Stage again to reflect changes done by pre-commit_ :code:`git add`
+5. Commit_ your changes using :code:`git commit -m "MY MESSAGE"`
+
 .. _workflows_releases:
 
 Realeasing and Publishing
@@ -320,6 +333,8 @@ Remove a required third party package from your package by using poetry:
 .. _Add: https://python-poetry.org/docs/cli/#add
 .. _API-Token: https://pypi.org/help/#apitoken
 
+.. _Black: https://github.com/psf/black
+
 .. _cj: https://github.com/cjolowicz
 .. _Commit: https://docs.github.com/en/rest/commits
 
@@ -340,6 +355,7 @@ Remove a required third party package from your package by using poetry:
 
 .. _pip: https://pip.pypa.io/
 .. _Poetry: https://python-poetry.org/
+.. _pre-commit: https://pre-commit.com/
 .. _Pull-Request: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
 .. _Push: https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository
 .. _PyPI: https://pypi.org/
