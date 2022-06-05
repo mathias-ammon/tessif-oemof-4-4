@@ -27,11 +27,11 @@ hpmpy-project
    :target: https://pypi.org/project/hpmpy-project/
    :alt: Status
 
-.. |Stable Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Stable PyPI Release/badge.svg
-   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Stable PyPI Release
+.. |Stable Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Stable\ PyPI\ Release/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Stable\ PyPI\ Release
    :alt: Stable PyPI Release Workflow Status
 
-.. |Develop Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/TestPyPI Develop Release/badge.svg
+.. |Develop Release| image:: https://github.com/tZ3ma/hpmpy-project/workflows/TestPyPI\ Develop\ Release/badge.svg
    :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=TestPyPI Develop Release
    :alt: Develop TestPyPI Release Workflow Status
 
