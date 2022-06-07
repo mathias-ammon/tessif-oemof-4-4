@@ -96,7 +96,7 @@ Use the following guide to fully take advantage of this project template:
    .. code-block:: console
 
       $ git grep -lz hpmpy-project | xargs -0 sed -i -e "s/hpmpy-project/MY-PROJECT/g"
-      $ git grep -lz hpmpy_project | xargs -0 sed -i -e "s/hpmpy-project/MY_PROJECT/g"
+      $ git grep -lz hpmpy_project | xargs -0 sed -i -e "s/hpmpy_project/MY_PROJECT/g"
 
 9. Rename the :file:`src/hpmpy_project` package folder by replacing
    :code:`MY_PROJECT` below:
@@ -180,7 +180,7 @@ Use the following guide to fully take advantage of this project template:
 
           $ git add -A
 	  $ git commit -m "Initial Implementation"
-	  $ git push
+	  $ git push -u origin develop
 
 
 18. (Optional) Create accounts on Codacy_, Codeclimate_ and Scrutinizer_ for
@@ -246,7 +246,7 @@ User Install of  Your Package Created with this Template
 ========================================================
 
 Use the following advice to install the standard / user version of this
-package, once you have **at least one push** on yout **main** and **develop**
+package, once you have **at least one push** on your **main** and **develop**
 branch (so the respective :ref:`release workflows <workflows_releases>` are
 triggered).
 
