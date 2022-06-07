@@ -12,3 +12,21 @@ max-complexity = 10
 max-line-length = 79
 # ignore assert warning in tests, sinc pytests requires asserts
 per-file-ignores = tests/*:S101
+
+# extend the flake8 known rst-roles:
+# credit goes to peterjc
+# https://github.com/peterjc/flake8-rst-docstrings/pull/16
+rst-roles =
+    attr,class,func,meth,mod,obj,ref,term,
+    # Python programming language:
+    py:func,py:mod,
+    # Sphinx Plugins:
+    paramref
+
+# extend the flake8 known rst-directives:
+# credit goes to peterjc
+# https://github.com/peterjc/flake8-rst-docstrings/pull/16
+rst-directives =
+    # These are sorted alphabetically - but that does not matter
+    autosummary,data,currentmodule,deprecated,
+    glossary,moduleauthor,plot,testcode,

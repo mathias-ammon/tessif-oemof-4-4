@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hpmpy-project"
-version = "0.0.6"
+version = "0.0.7"
 description = "Tweaked Hypermodern Python Project Template w/o Typing"
 authors = ["Mathias Ammon <mathias.ammon@tuhh.de>"]
 license = "MIT"
@@ -43,6 +43,9 @@ source = ["hpmpy_project"]
 [tool.coverage.report]
 show_missing = true
 fail_under = 100
+
+[tool.isort]
+profile = "black"
 
 [tool.pytest.ini_options]
 markers = [
