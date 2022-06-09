@@ -1,5 +1,5 @@
 # .github/workflows/tests_and_coverage.yml
-name: Tests and Coverage
+name: Tests-and-Coverage
 on: push
 jobs:
   tests_and_coverage:

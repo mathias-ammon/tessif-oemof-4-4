@@ -39,8 +39,8 @@ hpmpy-project
    :target: https://hpmpy-project.readthedocs.io/
    :alt: Read the documentation at https://hpmpy-project.readthedocs.io/
 
-.. |Tests| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Tests/badge.svg
-   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Tests
+.. |Tests| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Tests-and-Coverage/badge.svg
+   :target: https://github.com/tZ3ma/hpmpy-project/actions?workflow=Tests-and-Coverage
    :alt: Tests Workflow Status
 
 .. |Safety| image:: https://github.com/tZ3ma/hpmpy-project/workflows/Safety/badge.svg
