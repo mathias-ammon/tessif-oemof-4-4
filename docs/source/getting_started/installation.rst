@@ -212,7 +212,7 @@ Development Install of Your Package Created with this Template
 
    .. code-block:: console
 
-      $ ccd strutils
+      $ cd strutils
 
       $ pyenv install 3.10.4 (adjust version to your needs)
       $ pyenv install 3.9.13 (optional)

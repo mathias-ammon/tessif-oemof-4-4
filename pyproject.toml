@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hpmpy-project"
-version = "0.0.8"
+version = "0.0.9"
 description = "Tweaked Hypermodern Python Project Template w/o Typing"
 authors = ["Mathias Ammon <mathias.ammon@tuhh.de>"]
 license = "MIT"
@@ -12,6 +12,7 @@ keywords = ["hypermodern", "template"]
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.27.1"
+nox-poetry = "^1.0.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
