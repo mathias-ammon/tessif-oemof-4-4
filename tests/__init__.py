@@ -1,2 +1,2 @@
-# hpmpy_project/tests/__init__.py
-"""hpmpy-project's (pytest) package."""
+# tessif_oemof_4_4/tests/__init__.py
+"""tessif-oemof-4-4's (pytest) package."""
