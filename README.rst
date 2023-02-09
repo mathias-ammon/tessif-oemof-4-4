@@ -92,8 +92,7 @@ tessif-oemof-4-4
    :alt: Package uses flake8
 
 
-Newb tweaked non-typing version of the excellent Hypermodern-Python_ project
-foundation proposed by `Claudio Jolowicz <cj>`_
+Tessif-Plugin for including the software-tool oemof version 4.4.
 
 Installation
 ------------
