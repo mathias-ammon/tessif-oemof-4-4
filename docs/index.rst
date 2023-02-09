@@ -1,7 +1,7 @@
 tessif-oemof-4-4
 =================================================================================================
 
-tessif-oemof-4-4 has been developed for making new hypermodern python projects a blast!
+tessif-oemof-4-4 has been developed as part of the Tessif project.
 
 It uses the excellent Hypermodern-Python_ project foundation proposed by
 `Claudio Jolowicz <cj>`_.
