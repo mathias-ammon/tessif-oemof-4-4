@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tessif-oemof-4-4"
-version = "0.1.1"
+version = "0.1.2"
 description = "Tessif-Plugin for providing oemof version 4.4. support."
 authors = ["Mathias Ammon <tz3ma.coding@use.startmail.com>"]
 license = "MIT"
