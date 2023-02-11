@@ -2,8 +2,7 @@
 """tessif-oemof-4-4."""
 from importlib.metadata import version
 
-from .solve import optimize
-from .tsf2omf import transform
-
+from .optimize import optimize
+from .transform import transform
 
 __version__ = version(__name__)
