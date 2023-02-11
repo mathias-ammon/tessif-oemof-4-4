@@ -9,3 +9,7 @@ API
 
 .. toctree::
    :maxdepth: 4
+
+   api/transform
+   api/optimize
+   api/post_process

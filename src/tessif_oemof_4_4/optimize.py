@@ -42,9 +42,9 @@ def optimize(energy_system, solver="cbc", **kwargs):
     """
     # Default solver kwargs
     skwargs = {
-        'solver_io': 'lp',
-        'solve_kwargs': {},
-        'cmdline_options': {},
+        "solver_io": "lp",
+        "solve_kwargs": {},
+        "cmdline_options": {},
     }
 
     # Seperate the kwargs:
@@ -53,41 +53,42 @@ def optimize(energy_system, solver="cbc", **kwargs):
             skwargs.update({key: kwargs.pop(key)})
 
     # enforce solver from argument:
-    skwargs['solver'] = solver
+    skwargs["solver"] = solver
 
     # Prepare the optimization problem
     om = solph.Model(energy_system)
 
     # Parse global constraints (potentially added by a tessif transformation)
-    if hasattr(energy_system, 'global_constraints'):
+    if hasattr(energy_system, "global_constraints"):
         for constraint, value in energy_system.global_constraints.items():
 
             if isinstance(value, numbers.Number):
                 om = solph.constraints.generic_integral_limit(
-                    om=om,
-                    keyword=constraint,
-                    limit=value)
+                    om=om, keyword=constraint, limit=value
+                )
 
     om.solve(**skwargs)
 
     # Pump results into the model:
-    energy_system.results['main'] = solph.processing.results(om)
-    energy_system.results['meta'] = solph.processing.meta_results(om)
+    energy_system.results["main"] = solph.processing.results(om)
+    energy_system.results["meta"] = solph.processing.meta_results(om)
 
     # parse global results
-    energy_system.results['global'] = dict()
+    energy_system.results["global"] = dict()
 
     # Parse global constraint results (potentially added by a tessif
     # transformation)
-    if hasattr(energy_system, 'global_constraints'):
+    if hasattr(energy_system, "global_constraints"):
         for constraint, value in energy_system.global_constraints.items():
 
             if isinstance(value, numbers.Number):
-                energy_system.results['global'][constraint] = getattr(
-                    om, 'integral_limit_{}'.format(constraint))()
+                energy_system.results["global"][constraint] = getattr(
+                    om, "integral_limit_{}".format(constraint)
+                )()
 
-    energy_system.results['global']['costs'] = energy_system.results[
-        'meta']['objective']
+    energy_system.results["global"]["costs"] = energy_system.results["meta"][
+        "objective"
+    ]
 
     # Return the optimized oemof energy system
     return energy_system
