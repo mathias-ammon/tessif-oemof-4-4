@@ -2036,14 +2036,14 @@ requests = ">=2.27.1,<3.0.0"
 
 [[package]]
 name = "tessif"
-version = "0.0.19"
+version = "0.0.21"
 description = "Transforming Energy Supply System modell*I*ng Framework"
 category = "main"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "tessif-0.0.19-py3-none-any.whl", hash = "sha256:76d6fff1d3ef8303ebc4e785856c35a9f7f5b7dc792c23da63735d7c6e23fd2a"},
-    {file = "tessif-0.0.19.tar.gz", hash = "sha256:62da31d796fbf801cf683bb32739c478ffeffc6f7c33b2e89ddc5ebe25af7961"},
+    {file = "tessif-0.0.21-py3-none-any.whl", hash = "sha256:eab60672a4926361627a785216f2baf7a31e94536004ba007fd1365d777b95e2"},
+    {file = "tessif-0.0.21.tar.gz", hash = "sha256:baadf0fac00ccd14a9d9c6ee533610ac64c615b92171c0719b77d103ef66b30d"},
 ]
 
 [package.dependencies]
@@ -2279,4 +2279,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "4c60c2d81b4a2699b6c2aa57c28e4d7cfda4420bd284a469d40e48d7cb51f7be"
+content-hash = "6ed85df374b0778ebe6f7413adeb5281f2f79b2577cfc8e2acaa5a7e2f779952"
