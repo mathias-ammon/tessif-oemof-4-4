@@ -29,14 +29,14 @@ test = ["coverage", "flake8", "pexpect", "wheel"]
 
 [[package]]
 name = "astroid"
-version = "2.14.1"
+version = "2.14.2"
 description = "An abstract syntax tree for Python with inference support."
 category = "dev"
 optional = false
 python-versions = ">=3.7.2"
 files = [
-    {file = "astroid-2.14.1-py3-none-any.whl", hash = "sha256:23c718921acab5f08cbbbe9293967f1f8fec40c336d19cd75dc12a9ea31d2eb2"},
-    {file = "astroid-2.14.1.tar.gz", hash = "sha256:bd1aa4f9915c98e8aaebcd4e71930154d4e8c9aaf05d35ac0a63d1956091ae3f"},
+    {file = "astroid-2.14.2-py3-none-any.whl", hash = "sha256:0e0e3709d64fbffd3037e4ff403580550f14471fd3eaae9fa11cc9a5c7901153"},
+    {file = "astroid-2.14.2.tar.gz", hash = "sha256:a3cf9f02c53dd259144a7e8f3ccd75d67c9a8c716ef183e0c1f291bc5d7bb3cf"},
 ]
 
 [package.dependencies]
@@ -2036,14 +2036,14 @@ requests = ">=2.27.1,<3.0.0"
 
 [[package]]
 name = "tessif"
-version = "0.0.22"
+version = "0.0.23"
 description = "Transforming Energy Supply System modell*I*ng Framework"
 category = "main"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "tessif-0.0.22-py3-none-any.whl", hash = "sha256:3f87c4942d05ec788d3eca36727ef6af2f8b68f97fe95610c23865846e7732a4"},
-    {file = "tessif-0.0.22.tar.gz", hash = "sha256:003b017b71ea487f8480ddbe2d95384b1eac7634322c3f02c65227b344883dca"},
+    {file = "tessif-0.0.23-py3-none-any.whl", hash = "sha256:de1f3fc32fba691e14291a1f5bac4117865cc16d6ff14f91cd18182b1520a9c4"},
+    {file = "tessif-0.0.23.tar.gz", hash = "sha256:b72304c4c49a82cf1e75e0d4ff21f9882a2cd526083979dbe92d9fd2305ab38f"},
 ]
 
 [package.dependencies]
@@ -2279,4 +2279,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "5883444d3f078728c70a98846fc64dea73d4d59b7a8ad7f2fbe2de1adb783f05"
+content-hash = "dd1f942cdbd44fddd495483cf2af21ebba4b8a4af66137145646da5eccc7d64b"
