@@ -11,9 +11,9 @@ from warnings import warn
 
 import numpy as np
 import oemof.solph as solph
-import tessif.namedtuples as nts
+import tessif.frused.namedtuples as nts
 from tessif.frused import spellings
-from tessif.model import components
+from tessif import components
 
 logger = logging.getLogger(__name__)
 
@@ -109,7 +109,8 @@ def _parse_oemof_flow_parameters(component, target):
                 # preset nominal value in case a timeseries is used
                 # to parse specific values and existing when dealing with
                 # expandable values
-                flow_params["nominal_value"] = max(component.timeseries[target].max)
+                flow_params["nominal_value"] = max(
+                    component.timeseries[target].max)
                 nominal_value = flow_params["nominal_value"]
             else:
                 flow_params["nominal_value"] = nominal_value
@@ -144,12 +145,14 @@ def _parse_oemof_flow_parameters(component, target):
             if component.accumulated_amounts[target].min == 0:
                 summed_min = None
             else:
-                summed_min = component.accumulated_amounts[target].min / nominal_value
+                summed_min = component.accumulated_amounts[target].min / \
+                    nominal_value
 
             if component.accumulated_amounts[target].max == float("inf"):
                 summed_max = None
             else:
-                summed_max = component.accumulated_amounts[target].max / nominal_value
+                summed_max = component.accumulated_amounts[target].max / \
+                    nominal_value
 
             flow_params.update(
                 {
@@ -163,10 +166,12 @@ def _parse_oemof_flow_parameters(component, target):
         flow_params.pop("positive_gradient")
         flow_params.pop("negative_gradient")
         max_expansion = (
-            component.expansion_limits[target].max - flow_params["nominal_value"]
+            component.expansion_limits[target].max -
+            flow_params["nominal_value"]
         )
         min_expansion = (
-            component.expansion_limits[target].min - flow_params["nominal_value"]
+            component.expansion_limits[target].min -
+            flow_params["nominal_value"]
         )
 
         if max_expansion < 0:
@@ -481,7 +486,8 @@ def generate_oemof_chps(chps, tessif_busses, oemof_busses):
         if chp.conversions:
             oemof_conversions = _to_oemof_conversions(chp.conversions)
         if chp.conversion_factor_full_condensation:
-            oemof_cffc = _to_oemof_conversions(chp.conversion_factor_full_condensation)
+            oemof_cffc = _to_oemof_conversions(
+                chp.conversion_factor_full_condensation)
         for bus in tessif_busses:
             for input_ in chp.inputs:
                 bus_id = ".".join([chp.uid.name, input_])
@@ -631,7 +637,8 @@ def generate_oemof_links(links, tessif_busses, oemof_busses):
                             # the first input uid as first entry and the output
                             # uid (the one left in the conversion factors bus
                             # tuple) as second entry
-                            t = (bus_dict[bus.uid.name], bus_dict[bus_tuple[1]])
+                            t = (bus_dict[bus.uid.name],
+                                 bus_dict[bus_tuple[1]])
                             conversion_factors[t] = conv_factor
 
                     # parse input flow (oemof flows are keyed to objects!)
@@ -979,9 +986,11 @@ def generate_oemof_storages(storages, tessif_busses, oemof_busses):
         # Initialize default "capacity" Investment (expansion problem)
         if storage.expandable["capacity"]:
 
-            max_expansion = storage.expansion_limits["capacity"].max - storage.capacity
+            max_expansion = storage.expansion_limits["capacity"].max - \
+                storage.capacity
 
-            min_expansion = storage.expansion_limits["capacity"].min - storage.capacity
+            min_expansion = storage.expansion_limits["capacity"].min - \
+                storage.capacity
 
             if max_expansion < 0:
                 msg = (
