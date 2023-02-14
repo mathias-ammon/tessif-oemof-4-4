@@ -12,7 +12,7 @@ keywords = ["Tessif", "Tessif-Oemof", "tessif-oemof", "ESSMOS", "optimization", 
 [tool.poetry.dependencies]
 python = "^3.8"
 oemof-solph = "0.4.4"
-tessif = ">=0.0.23"
+tessif = ">=0.0.24"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
