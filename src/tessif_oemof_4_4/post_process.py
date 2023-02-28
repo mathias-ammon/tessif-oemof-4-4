@@ -1,21 +1,16 @@
 """Wrapping the tessif-oemof post-processing."""
-from collections import defaultdict, abc
+from collections import abc, defaultdict
 
 import numpy as np
-from oemof import solph
 import pandas as pd
-
-from tessif.frused import (
-    namedtuples as nts,
-)
-
-from tessif.frused.defaults import energy_system_nodes as esn_defs
-
 import tessif.post_process as base
+from oemof import solph
+from tessif.frused import namedtuples as nts
+from tessif.frused.defaults import energy_system_nodes as esn_defs
 
 
 class OmfResultier(base.Resultier):
-    """ Transform nodes and edges into their name representation. Child of
+    """Transform nodes and edges into their name representation. Child of
     :class:`~tessif.transform.es2mapping.base.Resultier` and mother of all
     oemof Resultiers.
 
@@ -27,16 +22,15 @@ class OmfResultier(base.Resultier):
     """
 
     component_type_mapping = {
-        solph.components.GenericStorage: 'storage',
-        solph.components.ExtractionTurbineCHP: 'transformer',
-        solph.components.GenericCHP: 'transformer',
-        solph.components.OffsetTransformer: 'transformer',
-        solph.custom.Link: 'connector',
-
-        solph.network.Bus: 'bus',
-        solph.network.Sink: 'sink',
-        solph.network.Source: 'source',
-        solph.network.Transformer: 'transformer',
+        solph.components.GenericStorage: "storage",
+        solph.components.ExtractionTurbineCHP: "transformer",
+        solph.components.GenericCHP: "transformer",
+        solph.components.OffsetTransformer: "transformer",
+        solph.custom.Link: "connector",
+        solph.network.Bus: "bus",
+        solph.network.Sink: "sink",
+        solph.network.Source: "source",
+        solph.network.Transformer: "transformer",
     }
 
     def __init__(self, optimized_es, **kwargs):
@@ -54,8 +48,7 @@ class OmfResultier(base.Resultier):
             prelim_uid = node.label
             if prelim_uid.component is None:
                 uid_dict = prelim_uid._asdict()
-                uid_dict['component'] = OmfResultier.component_type_mapping[
-                    type(node)]
+                uid_dict["component"] = OmfResultier.component_type_mapping[type(node)]
                 uid = nts.Uid(**uid_dict)
             else:
                 uid = prelim_uid
@@ -66,8 +59,22 @@ class OmfResultier(base.Resultier):
 
     def _map_edges(self, optimized_es):
         r"""Return list of (inflow, node) label string representation."""
-        return [nts.Edge(str(inflow), str(node)) for node in optimized_es.nodes
-                for inflow in node.inputs.keys()]
+        return [
+            nts.Edge(str(inflow), str(node))
+            for node in optimized_es.nodes
+            for inflow in node.inputs.keys()
+        ]
+
+    def dct_repr(self):
+        """Extend the base dict reprsentation."""
+        excluded = [
+            "_inflow_characterized_components",
+            "_outflow_characterized_components",
+        ]
+        dct = {
+            key: value for key, value in self.__dict__.items() if key not in excluded
+        }
+        return dct
 
 
 class IntegratedGlobalResultier(OmfResultier, base.IntegratedGlobalResultier):
@@ -153,29 +160,19 @@ class IntegratedGlobalResultier(OmfResultier, base.IntegratedGlobalResultier):
             specific_emissions = flow_results.edge_specific_emissions[edge]
             specific_flow_costs = flow_results.edge_specific_flow_costs[edge]
 
-            total_emissions += (
-                net_energy_flow *
-                specific_emissions
-            )
+            total_emissions += net_energy_flow * specific_emissions
 
-            flow_costs += (
-                net_energy_flow *
-                specific_flow_costs
-            )
+            flow_costs += net_energy_flow * specific_flow_costs
 
         for node in self.nodes:
             initial_capacity = cap_results.node_original_capacity[node]
             final_capacity = cap_results.node_installed_capacity[node]
             expansion_cost = cap_results.node_expansion_costs[node]
 
-            if not any(
-                    [cap is None
-                     for cap in (final_capacity, initial_capacity)]
-            ):
+            if not any([cap is None for cap in (final_capacity, initial_capacity)]):
                 node_expansion_costs = (
-                    (final_capacity - initial_capacity) *
-                    expansion_cost
-                )
+                    final_capacity - initial_capacity
+                ) * expansion_cost
             else:
                 node_expansion_costs = 0
 
@@ -185,13 +182,41 @@ class IntegratedGlobalResultier(OmfResultier, base.IntegratedGlobalResultier):
             capital_costs += node_expansion_costs
 
         return {
-            'emissions (sim)': round(total_emissions, 0),
-            'costs (sim)': round(optimized_es.results['global']['costs'], 0,),
-            'opex (ppcd)': round(flow_costs, 0),
-            'capex (ppcd)': round(capital_costs, 0),
+            "emissions (sim)": round(total_emissions, 0),
+            "costs (sim)": round(
+                optimized_es.results["global"]["costs"],
+                0,
+            ),
+            "opex (ppcd)": round(flow_costs, 0),
+            "capex (ppcd)": round(capital_costs, 0),
         }
 
-        return optimized_es.results['global']
+        return optimized_es.results["global"]
+
+
+class ScaleResultier(OmfResultier, base.ScaleResultier):
+    """Extract number of constraints.
+
+    Parameters
+    ----------
+    optimized_es:
+        :ref:`Model <SupportedModels>` specific, optimized energy system
+        containing its results.
+
+    See Also
+    --------
+    For functionality documentation see the respective :class:`base class
+    <tessif.post_process.ScaleResultier>`.
+    """
+
+    def __init__(self, optimized_es, **kwargs):
+        super().__init__(optimized_es=optimized_es, **kwargs)
+
+    def _map_number_of_constraints(self, optimized_es):
+        """Interface to extract the number of constraints out of the
+        optimized oemof system model.
+        """
+        return optimized_es.results.problem.number_of_constraints
 
 
 class LoadResultier(OmfResultier, base.LoadResultier):
@@ -204,7 +229,7 @@ class LoadResultier(OmfResultier, base.LoadResultier):
         An optimized oemof energy system containing its
         :ref:`results <omf_results>`.
 
-    See also
+    See Also
     --------
     For functionality documentation see the respective :class:`base class
     <tessif.transform.es2mapping.base.LoadResultier>`.
@@ -214,47 +239,63 @@ class LoadResultier(OmfResultier, base.LoadResultier):
         super().__init__(optimized_es=optimized_es, **kwargs)
 
     def _map_loads(self, optimized_es):
-        """ Map loads to node labels"""
+        """Map loads to node labels."""
         # Use defaultdict of empty DataFrame as loads container:
         _loads = defaultdict(lambda: pd.DataFrame())
 
         for node in optimized_es.nodes:
             time_series_results = solph.views.node(
-                optimized_es.results['main'], node).get(
-                    'sequences', pd.DataFrame())
+                optimized_es.results["main"], node
+            ).get("sequences", pd.DataFrame())
 
             # only keep columns with 'flow' results
             time_series_results = time_series_results[
-                np.array([col for col in time_series_results.columns
-                          if 'flow' == col[1]], dtype=object)]
+                np.array(
+                    [col for col in time_series_results.columns if "flow" == col[1]],
+                    dtype=object,
+                )
+            ]
 
             # rename time_series_results to to edge labels
             time_series_results.rename(
-                columns={col: (str(col[0][0].label), str(col[0][1].label))
-                         for col in time_series_results.columns}, inplace=True)
+                columns={
+                    col: (str(col[0][0].label), str(col[0][1].label))
+                    for col in time_series_results.columns
+                },
+                inplace=True,
+            )
 
             temp_df = time_series_results.copy()
             # rename time_series_results inflow columns to inflow node name
             time_series_results.rename(
                 columns={
-                    col: n for col in time_series_results.columns
-                    for n in col if not any(
-                        str(x.label) == col[1]
-                        for x in node.outputs.keys()) and
-                    n != str(node.label)}, inplace=True)
+                    col: n
+                    for col in time_series_results.columns
+                    for n in col
+                    if not any(str(x.label) == col[1] for x in node.outputs.keys())
+                    and n != str(node.label)
+                },
+                inplace=True,
+            )
 
-            inflows = time_series_results.drop(columns=[
-                col for col in time_series_results.columns if isinstance(
-                    col, tuple)])
+            inflows = time_series_results.drop(
+                columns=[
+                    col for col in time_series_results.columns if isinstance(col, tuple)
+                ]
+            )
 
             # make inflow values negative
             inflows = inflows.multiply(-1)
             # enforce -0. on inflows
             inflows = inflows.replace({0: -float(0), float(0): -float(0)})
 
-            outflows = time_series_results.drop(columns=[
-                col for col in time_series_results.columns if not isinstance(
-                    col, tuple)])
+            outflows = time_series_results.drop(
+                columns=[
+                    col
+                    for col in time_series_results.columns
+                    if not isinstance(col, tuple)
+                ]
+            )
 
             # enforce +0. on outflows
             outflows = outflows.replace({-float(0): float(0)})
@@ -262,13 +303,16 @@ class LoadResultier(OmfResultier, base.LoadResultier):
             # rename time_series_results out columns to outflow node name
             outflows.rename(
                 columns={
-                    col: n for col in temp_df.columns
-                    for n in col if not any(
-                        str(x.label) == col[0] for x in node.inputs.keys()) and
-                    n != str(node.label)}, inplace=True)
+                    col: n
+                    for col in temp_df.columns
+                    for n in col
+                    if not any(str(x.label) == col[0] for x in node.inputs.keys())
+                    and n != str(node.label)
+                },
+                inplace=True,
+            )
 
-            time_series_results = pd.concat(
-                [inflows, outflows], axis='columns')
+            time_series_results = pd.concat([inflows, outflows], axis="columns")
             time_series_results.columns.name = str(node.label)
             _loads[str(node.label)] = time_series_results
 
@@ -292,20 +336,17 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
 
     def __init__(self, optimized_es, **kwargs):
 
-        self._inflow_characterized_components = (
-            solph.Sink,
-        )
+        self._inflow_characterized_components = (solph.Sink,)
 
         self._outflow_characterized_components = (
             solph.Transformer,
             solph.Source,
             solph.components.OffsetTransformer,
             solph.components.ExtractionTurbineCHP,
-            solph.components.GenericCHP
+            solph.components.GenericCHP,
         )
 
-        super().__init__(optimized_es=optimized_es,
-                         **kwargs)
+        super().__init__(optimized_es=optimized_es, **kwargs)
 
     @property
     def node_characteristic_value(self):
@@ -382,39 +423,38 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                     if (inflow, node) in optimized_es.flows():
                         # parse investment objects
                         inv_obj = getattr(
-                            optimized_es.flows()[(inflow, node)],
-                            'investment'
+                            optimized_es.flows()[(inflow, node)], "investment"
                         )
                         # is inflow -> node characterized by investment?
                         if inv_obj:
 
                             # yes, so get the results sub dict holding it ...
                             scalar_results = solph.views.node(
-                                optimized_es.results['main'],
-                                node
-                            ).get('scalars', dict())
+                                optimized_es.results["main"], node
+                            ).get("scalars", dict())
 
                             # ... extract the value
                             # ... and add start value
-                            inst_cap = scalar_results.get(
-                                ((inflow, node), 'invest'), 0) \
+                            inst_cap = (
+                                scalar_results.get(((inflow, node), "invest"), 0)
                                 + inv_obj.existing
+                            )
 
                         else:
                             # Extract nominal_value if present
                             inst_cap = getattr(
                                 optimized_es.flows()[(inflow, node)],
-                                'nominal_value',
-                                esn_defs[
-                                    'variable_capacity']
+                                "nominal_value",
+                                esn_defs["variable_capacity"],
                             )
 
                             # or the inst cap is inferred by using the
                             # max inflow
-                            if inst_cap == esn_defs['variable_capacity']:
+                            if inst_cap == esn_defs["variable_capacity"]:
                                 inst_cap = max(
-                                    self.node_inflows[
-                                        str(node.label)][str(inflow.label)]
+                                    self.node_inflows[str(node.label)][
+                                        str(inflow.label)
+                                    ]
                                 )
                         node_inst_cap_dict[str(inflow.label)] = inst_cap
 
@@ -432,8 +472,7 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                     if (node, outflow) in optimized_es.flows():
                         # parse investment objects
                         inv_obj = getattr(
-                            optimized_es.flows()[(node, outflow)],
-                            'investment'
+                            optimized_es.flows()[(node, outflow)], "investment"
                         )
 
                         if inv_obj:
@@ -441,35 +480,34 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
 
                             # yes, so get the results sub dict holding it ...
                             scalar_results = solph.views.node(
-                                optimized_es.results['main'],
-                                node
-                            ).get('scalars', dict())
+                                optimized_es.results["main"], node
+                            ).get("scalars", dict())
 
                             # ... extract the value
                             # ... and add start value
-                            inst_cap = scalar_results.get(
-                                ((node, outflow), 'invest'), 0) \
+                            inst_cap = (
+                                scalar_results.get(((node, outflow), "invest"), 0)
                                 + inv_obj.existing
+                            )
 
                         else:
                             # No, so nominal value is the installed capacity ..
                             inst_cap = getattr(
                                 optimized_es.flows()[(node, outflow)],
-                                'nominal_value',
-                                esn_defs['variable_capacity']
+                                "nominal_value",
+                                esn_defs["variable_capacity"],
                             )
 
                             # or the inst cap is inferred by using the
                             # max outflow
-                            if inst_cap == esn_defs['variable_capacity']:
-                                outflow_series = self.node_outflows[
-                                    str(node.label)][str(outflow.label)]
+                            if inst_cap == esn_defs["variable_capacity"]:
+                                outflow_series = self.node_outflows[str(node.label)][
+                                    str(outflow.label)
+                                ]
                                 # inst_cap = max(outflow_series)
                                 # account for unused storages
                                 if not outflow_series.empty:
-                                    inst_cap = max(
-                                        outflow_series
-                                    )
+                                    inst_cap = max(outflow_series)
                                 else:
                                     inst_cap = 0
 
@@ -486,25 +524,26 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                 _installed_capacities[str(node.label)] = inst_cap
 
             elif isinstance(node, (solph.Bus, solph.custom.Link)):
-                _installed_capacities[
-                    str(node.label)] = esn_defs['variable_capacity']
+                _installed_capacities[str(node.label)] = esn_defs["variable_capacity"]
 
             elif isinstance(node, solph.components.GenericStorage):
 
                 if node.investment:
 
                     additional_capacity = solph.views.node(
-                        optimized_es.results['main'], node).get('scalars')[
-                        ((node, None), 'invest')]
+                        optimized_es.results["main"], node
+                    ).get("scalars")[((node, None), "invest")]
 
                     existing_capacity = node.investment.existing
 
                     _installed_capacities[str(node.label)] = (
-                        additional_capacity + existing_capacity)
+                        additional_capacity + existing_capacity
+                    )
 
                 else:
-                    _installed_capacities[str(node.label)] = (
-                        node.nominal_storage_capacity)
+                    _installed_capacities[
+                        str(node.label)
+                    ] = node.nominal_storage_capacity
 
         return dict(_installed_capacities)
 
@@ -525,8 +564,7 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                     if (inflow, node) in optimized_es.flows():
                         # parse investment objects
                         inv_obj = getattr(
-                            optimized_es.flows()[(inflow, node)],
-                            'investment'
+                            optimized_es.flows()[(inflow, node)], "investment"
                         )
                         # is inflow -> node characterized by investment?
                         if inv_obj:
@@ -536,14 +574,13 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                             # Extract nominal_value if present
                             inst_cap = getattr(
                                 optimized_es.flows()[(inflow, node)],
-                                'nominal_value',
-                                esn_defs[
-                                    'variable_capacity']
+                                "nominal_value",
+                                esn_defs["variable_capacity"],
                             )
 
                             # or the inst cap is set to 0 if no value was set
                             # an thus a fallback on the default occurred
-                            if inst_cap == esn_defs['variable_capacity']:
+                            if inst_cap == esn_defs["variable_capacity"]:
                                 inst_cap = 0
 
                         node_inst_cap_dict[str(inflow.label)] = inst_cap
@@ -562,8 +599,7 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                     if (node, outflow) in optimized_es.flows():
                         # parse investment objects
                         inv_obj = getattr(
-                            optimized_es.flows()[(node, outflow)],
-                            'investment'
+                            optimized_es.flows()[(node, outflow)], "investment"
                         )
 
                         if inv_obj:
@@ -574,13 +610,13 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                             # No, so nominal value is the installed capacity ..
                             inst_cap = getattr(
                                 optimized_es.flows()[(node, outflow)],
-                                'nominal_value',
-                                esn_defs['variable_capacity']
+                                "nominal_value",
+                                esn_defs["variable_capacity"],
                             )
 
                             # or the inst cap is set to 0 if no value was set
                             # an thus a fallback on the default occurred
-                            if inst_cap == esn_defs['variable_capacity']:
+                            if inst_cap == esn_defs["variable_capacity"]:
                                 inst_cap = 0
 
                         node_inst_cap_dict[str(outflow.label)] = inst_cap
@@ -595,8 +631,7 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                 _installed_capacities[str(node.label)] = inst_cap
 
             elif isinstance(node, (solph.Bus, solph.custom.Link)):
-                _installed_capacities[
-                    str(node.label)] = esn_defs['variable_capacity']
+                _installed_capacities[str(node.label)] = esn_defs["variable_capacity"]
 
             elif isinstance(node, solph.components.GenericStorage):
 
@@ -623,15 +658,14 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                     if (inflow, node) in optimized_es.flows():
                         # parse investment objects
                         inv_obj = getattr(
-                            optimized_es.flows()[(inflow, node)],
-                            'investment'
+                            optimized_es.flows()[(inflow, node)], "investment"
                         )
                         # is inflow -> node characterized by investment?
                         if inv_obj:
                             cost = inv_obj.ep_costs
 
                         else:
-                            cost = esn_defs['expansion_costs']
+                            cost = esn_defs["expansion_costs"]
 
                         node_expansion_costs_dict[str(inflow.label)] = cost
 
@@ -649,15 +683,14 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                     if (node, outflow) in optimized_es.flows():
                         # parse investment objects
                         inv_obj = getattr(
-                            optimized_es.flows()[(node, outflow)],
-                            'investment'
+                            optimized_es.flows()[(node, outflow)], "investment"
                         )
 
                         if inv_obj:
                             # is node -> outflow characterized by investment?
                             cost = inv_obj.ep_costs
                         else:
-                            cost = esn_defs['expansion_costs']
+                            cost = esn_defs["expansion_costs"]
 
                         node_expansion_costs_dict[str(outflow.label)] = cost
 
@@ -676,12 +709,12 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                     costs = node.investment.ep_costs
 
                 else:
-                    costs = esn_defs['expansion_costs']
+                    costs = esn_defs["expansion_costs"]
 
                 expansion_costs[str(node.label)] = costs
 
             else:
-                expansion_costs[str(node.label)] = esn_defs['expansion_costs']
+                expansion_costs[str(node.label)] = esn_defs["expansion_costs"]
 
         return expansion_costs
 
@@ -694,7 +727,7 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
         # Map the respective capacity factors:
         for node in optimized_es.nodes:
 
-            characteristic_mean = pd.Series()
+            characteristic_mean = pd.Series(dtype="float64")
 
             inst_cap = self._installed_capacities[str(node.label)]
 
@@ -702,46 +735,48 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
             if not isinstance(inst_cap, abc.Iterable):
 
                 # yes, it is
-                if inst_cap != esn_defs[
-                        'variable_capacity']:
+                if inst_cap != esn_defs["variable_capacity"]:
 
-                    if isinstance(node,
-                                  solph.components.GenericCHP):
+                    if isinstance(node, solph.components.GenericCHP):
                         char_tar = list(node.electrical_output)[0]
-                        characteristic_mean = self._outflows[
-                            str(node.label)][str(char_tar)].mean(axis='index')
+                        characteristic_mean = self._outflows[str(node.label)][
+                            str(char_tar)
+                        ].mean(axis="index")
 
                     elif isinstance(node, solph.components.GenericStorage):
-                        characteristic_mean = StorageResultier(
-                            optimized_es).node_soc[str(node.label)].mean(
-                                axis='index')
+                        characteristic_mean = (
+                            StorageResultier(optimized_es)
+                            .node_soc[str(node.label)]
+                            .mean(axis="index")
+                        )
 
                     # map all other nodes
                     else:
                         characteristic_mean = self.node_summed_loads[
-                            str(node.label)].mean(axis='index')
+                            str(node.label)
+                        ].mean(axis="index")
 
                     # deal with node of variable size, left unused:
                     if inst_cap == 0:
                         _characteristic_values[str(node.label)] = 0
                     else:
-                        _characteristic_values[
-                            str(node.label)] = characteristic_mean / inst_cap
+                        _characteristic_values[str(node.label)] = (
+                            characteristic_mean / inst_cap
+                        )
                     # print(characteristic_mean, inst_cap)
 
                 else:
-                    _characteristic_values[
-                        str(node.label)] = esn_defs[
-                            'characteristic_value']
+                    _characteristic_values[str(node.label)] = esn_defs[
+                        "characteristic_value"
+                    ]
 
             # not its not, so keep the series format
             else:
 
-                characteristic_mean = self._outflows[
-                    str(node.label)].mean()
+                characteristic_mean = self._outflows[str(node.label)].mean()
 
                 # create the series beforehand
-                char_values = pd.Series()
+                char_values = pd.Series(dtype="float64")
                 for idx, cap in inst_cap.fillna(0).items():
 
                     if cap != 0:
@@ -750,14 +785,13 @@ class CapacityResultier(base.CapacityResultier, LoadResultier):
                         char_values[idx] = 0
 
                 # to replace nans by 0:
-                _characteristic_values[
-                    str(node.label)] = char_values.fillna(0)
+                _characteristic_values[str(node.label)] = char_values.fillna(0)
 
         return dict(_characteristic_values)
 
 
 class StorageResultier(OmfResultier, base.StorageResultier):
-    r""" Transforming storage results into dictionairies keyed by node.
+    r"""Transforming storage results into dictionairies keyed by node.
 
     Parameters
     ----------
@@ -775,15 +809,14 @@ class StorageResultier(OmfResultier, base.StorageResultier):
         super().__init__(optimized_es=optimized_es, **kwargs)
 
     def _map_states_of_charge(self, optimized_es):
-        """ Map storage labels to their states of charge"""
+        """Map storage labels to their states of charge"""
 
-        _socs = defaultdict(lambda: pd.Series())
+        _socs = defaultdict(lambda: pd.Series(dtype="float64"))
         for node in optimized_es.nodes:
-            if isinstance(node,
-                          solph.components.GenericStorage):
-                soc = solph.views.node(
-                    optimized_es.results['main'], node).get(
-                        'sequences')[((node, None), 'storage_content')]
+            if isinstance(node, solph.components.GenericStorage):
+                soc = solph.views.node(optimized_es.results["main"], node).get(
+                    "sequences"
+                )[((node, None), "storage_content")]
                 soc.name = str(node.label)
 
                 _socs[str(node.label)] = soc
@@ -792,7 +825,7 @@ class StorageResultier(OmfResultier, base.StorageResultier):
 
 
 class NodeCategorizer(OmfResultier, base.NodeCategorizer):
-    r""" Categorizing the nodes of an optimized oemof energy system.
+    r"""Categorizing the nodes of an optimized oemof energy system.
 
     Categorization utilizes :attr:`~tessif.frused.namedtuples.Uid`.
 
@@ -840,12 +873,13 @@ class NodeCategorizer(OmfResultier, base.NodeCategorizer):
 
         # Map the respective sectors:
         for node in optimized_es.nodes:
-            if hasattr(node.label, 'component'):
+            if hasattr(node.label, "component"):
                 _component_nodes[node.label.component.lower().capitalize()].append(
-                    str(node.label))
+                    str(node.label)
+                )
             # Node has no component attributed in node.label
             else:
-                _component_nodes['Unspecified'].append(str(node.label))
+                _component_nodes["Unspecified"].append(str(node.label))
 
         return dict(_component_nodes)
 
@@ -857,11 +891,11 @@ class NodeCategorizer(OmfResultier, base.NodeCategorizer):
 
         # Map the respective sectors:
         for node in optimized_es.nodes:
-            if hasattr(node.label, 'sector'):
+            if hasattr(node.label, "sector"):
                 _sectored_nodes[node.label.sector].append(str(node.label))
             # Node has no sector attributed in node.label
             else:
-                _sectored_nodes['Unspecified'].append(str(node.label))
+                _sectored_nodes["Unspecified"].append(str(node.label))
 
         return dict(_sectored_nodes)
 
@@ -873,11 +907,11 @@ class NodeCategorizer(OmfResultier, base.NodeCategorizer):
 
         # Map the respective sectors:
         for node in optimized_es.nodes:
-            if hasattr(node.label, 'region'):
+            if hasattr(node.label, "region"):
                 _regionalized_nodes[node.label.region].append(str(node.label))
             # Node has no region attributed in node.label
             else:
-                _regionalized_nodes['Unspecified'].append(str(node.label))
+                _regionalized_nodes["Unspecified"].append(str(node.label))
 
         return dict(_regionalized_nodes)
 
@@ -889,10 +923,10 @@ class NodeCategorizer(OmfResultier, base.NodeCategorizer):
 
         # 3.) Map the respective coordinates:
         for node in optimized_es.nodes:
-            if (hasattr(node.label, 'latitude') and
-                    hasattr(node.label, 'latitude')):
+            if hasattr(node.label, "latitude") and hasattr(node.label, "latitude"):
                 _coordinates[str(node.label)] = nts.Coordinates(
-                    node.label.latitude, node.label.longitude)
+                    node.label.latitude, node.label.longitude
+                )
 
             # Node has no coordinates attributed in node.label
             else:
@@ -909,15 +943,14 @@ class NodeCategorizer(OmfResultier, base.NodeCategorizer):
 
         # Map the respective carriers:
         for node in optimized_es.nodes:
-            if hasattr(node.label, 'carrier'):
-                _carrier_grouped_nodes[node.label.carrier].append(
-                    str(node.label))
+            if hasattr(node.label, "carrier"):
+                _carrier_grouped_nodes[node.label.carrier].append(str(node.label))
                 _node_energy_carriers[str(node.label)] = node.label.carrier
 
             # Node has no region attributed in node.label
             else:
-                _carrier_grouped_nodes['Unspecified'].append(str(node.label))
-                _node_energy_carriers[str(node.label)] = 'Unspecified'
+                _carrier_grouped_nodes["Unspecified"].append(str(node.label))
+                _node_energy_carriers[str(node.label)] = "Unspecified"
 
         return (dict(_carrier_grouped_nodes), dict(_node_energy_carriers))
 
@@ -929,11 +962,11 @@ class NodeCategorizer(OmfResultier, base.NodeCategorizer):
 
         # Map the respective sectors:
         for node in optimized_es.nodes:
-            if hasattr(node.label, 'node_type'):
+            if hasattr(node.label, "node_type"):
                 _typed_nodes[node.label.node_type].append(str(node.label))
             # Node has no sector attributed in node.label
             else:
-                _typed_nodes['Unspecified'].append(str(node.label))
+                _typed_nodes["Unspecified"].append(str(node.label))
 
         return dict(_typed_nodes)
 
@@ -956,8 +989,7 @@ class FlowResultier(base.FlowResultier, LoadResultier):
 
     def __init__(self, optimized_es, **kwargs):
 
-        super().__init__(optimized_es=optimized_es,
-                         **kwargs)
+        super().__init__(optimized_es=optimized_es, **kwargs)
 
     def _map_specific_flow_costs(self, optimized_es):
         r"""Energy specific flow costs mapped to edges."""
@@ -968,9 +1000,10 @@ class FlowResultier(base.FlowResultier, LoadResultier):
         for node in optimized_es.nodes:
             for inflow in node.inputs.keys():
                 _specific_flow_costs[
-                    nts.Edge(str(inflow.label), str(node.label))] = getattr(
-                        optimized_es.flows()[
-                            (inflow, node)], 'variable_costs', 0)[0]
+                    nts.Edge(str(inflow.label), str(node.label))
+                ] = getattr(optimized_es.flows()[(inflow, node)], "variable_costs", 0)[
+                    0
+                ]
 
         return dict(_specific_flow_costs)
 
@@ -983,9 +1016,8 @@ class FlowResultier(base.FlowResultier, LoadResultier):
         for node in optimized_es.nodes:
             for inflow in node.inputs.keys():
                 _specific_emissions[
-                    nts.Edge(str(inflow.label), str(node.label))] = getattr(
-                        optimized_es.flows()[
-                            (inflow, node)], 'emissions', 0)
+                    nts.Edge(str(inflow.label), str(node.label))
+                ] = getattr(optimized_es.flows()[(inflow, node)], "emissions", 0)
 
         return dict(_specific_emissions)
 
@@ -1072,13 +1104,11 @@ class NodeFormatier(base.NodeFormatier, CapacityResultier):
     <tessif.transform.es2mapping.base.NodeFormatier>`.
     """
 
-    def __init__(self, optimized_es, cgrp='name', drawutil='nx', **kwargs):
+    def __init__(self, optimized_es, cgrp="name", drawutil="nx", **kwargs):
 
         super().__init__(
-            optimized_es=optimized_es,
-            cgrp=cgrp,
-            drawutil=drawutil,
-            **kwargs)
+            optimized_es=optimized_es, cgrp=cgrp, drawutil=drawutil, **kwargs
+        )
 
 
 class MplLegendFormatier(base.MplLegendFormatier, CapacityResultier):
@@ -1117,8 +1147,7 @@ class MplLegendFormatier(base.MplLegendFormatier, CapacityResultier):
     <tessif.transform.es2mapping.base.MplLegendFormatier>`.
     """
 
-    def __init__(self, optimized_es, cgrp='all',
-                 markers='formatier', **kwargs):
+    def __init__(self, optimized_es, cgrp="all", markers="formatier", **kwargs):
 
         # needed transformers
 
@@ -1131,11 +1160,11 @@ class MplLegendFormatier(base.MplLegendFormatier, CapacityResultier):
         # color, and implement some if clauses to only map the legend
         # requested. This also implies chaining the behaviour of
         # MplLegendFormatier.node_legend
-        self._nformats = NodeFormatier(
-            optimized_es, drawutil='nx', cgrp='all')
+        self._nformats = NodeFormatier(optimized_es, drawutil="nx", cgrp="all")
 
-        super().__init__(optimized_es=optimized_es, cgrp='all',
-                         markers=markers, **kwargs)
+        super().__init__(
+            optimized_es=optimized_es, cgrp="all", markers=markers, **kwargs
+        )
 
 
 class EdgeFormatier(base.EdgeFormatier, FlowResultier):
@@ -1184,17 +1213,14 @@ class EdgeFormatier(base.EdgeFormatier, FlowResultier):
     <tessif.transform.es2mapping.base.EdgeFormatier>`.
     """
 
-    def __init__(self, optimized_es, drawutil='nx', cls=None, **kwargs):
+    def __init__(self, optimized_es, drawutil="nx", cls=None, **kwargs):
 
         super().__init__(
-            optimized_es=optimized_es,
-            drawutil=drawutil,
-            cls=cls,
-            **kwargs)
+            optimized_es=optimized_es, drawutil=drawutil, cls=cls, **kwargs
+        )
 
 
-class AllFormatier(
-        LabelFormatier, NodeFormatier, MplLegendFormatier, EdgeFormatier):
+class AllFormatier(LabelFormatier, NodeFormatier, MplLegendFormatier, EdgeFormatier):
     r"""
     Transforming ES results into visual expression dicts keyed by attribute.
     Incorporates all the functionalities from its
@@ -1273,23 +1299,29 @@ class AllFormatier(
     **Potentially Unfit For Large System Models**.
     """
 
-    def __init__(self, optimized_es, cgrp='all',
-                 markers='formatier',
-                 drawutil='nx',
-                 cls=None,
-                 **kwargs):
+    def __init__(
+        self,
+        optimized_es,
+        cgrp="all",
+        markers="formatier",
+        drawutil="nx",
+        cls=None,
+        **kwargs
+    ):
 
         super().__init__(
             optimized_es=optimized_es,
-            cgrp=cgrp, markers=markers, drawutil=drawutil, **kwargs)
+            cgrp=cgrp,
+            markers=markers,
+            drawutil=drawutil,
+            **kwargs
+        )
 
         # initializing edge formatier seperately, because of differing
         # init signature causing a wierd unrespecting of drawutl
         super(EdgeFormatier, self).__init__(
-            optimized_es=optimized_es,
-            drawutil=drawutil,
-            cls=cls,
-            **kwargs)
+            optimized_es=optimized_es, drawutil=drawutil, cls=cls, **kwargs
+        )
 
 
 class ICRHybridier(OmfResultier, base.ICRHybridier):
@@ -1310,14 +1342,15 @@ class ICRHybridier(OmfResultier, base.ICRHybridier):
     <tessif.transform.es2mapping.base.ICRHybridier>`.
     """
 
-    def __init__(self, optimized_es, colored_by='name', **kwargs):
+    def __init__(self, optimized_es, colored_by="name", **kwargs):
         base.ICRHybridier.__init__(
             self,
             optimized_es=optimized_es,
             node_formatier=NodeFormatier(optimized_es, cgrp=colored_by),
             edge_formatier=EdgeFormatier(optimized_es),
             mpl_legend_formatier=MplLegendFormatier(optimized_es),
-            **kwargs)
+            **kwargs
+        )
 
     @property
     def node_characteristic_value(self):
