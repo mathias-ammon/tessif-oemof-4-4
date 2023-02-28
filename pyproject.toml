@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tessif-oemof-4-4"
-version = "0.1.6"
+version = "0.1.7"
 description = "Tessif-Plugin for providing oemof version 4.4. support."
 authors = ["Mathias Ammon <tz3ma.coding@use.startmail.com>"]
 license = "MIT"
@@ -12,7 +12,7 @@ keywords = ["Tessif", "Tessif-Oemof", "tessif-oemof", "ESSMOS", "optimization", 
 [tool.poetry.dependencies]
 python = "^3.8"
 oemof-solph = "0.4.4"
-tessif = ">=0.0.24"
+tessif = ">=0.0.25"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
